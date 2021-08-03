@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Study Check</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="{% static 'jquery-3.4.1.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+</head>
+
+<body>
+    <!-- <div class = "container"> -->
+        <div class = "sidenav">
+            {% include "menu.html" %}
+        </div>
+        <div class = "main">
+            {% block content %}
+            {%endblock%}
+            {% block script %}
+            {% endblock %}
+        </div>
+
+    <!-- </div> -->
+</body>
+</html>

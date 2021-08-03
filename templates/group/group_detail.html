@@ -1,0 +1,17 @@
+{% extends 'group_base.html' %}
+{% block content %}
+    <!-- <form action="{% url 'group:group_detail' group.id %}" method="post">       -->        
+    <form method="POST" class="post-form my-3">
+        {% csrf_token %}
+        <h1>{{ group.name  }} - {{ group.uid.username }}</h1>
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <div>
+        <p>그룹 소개:  {{ group.info }}</p>
+        <p>그룹 목표:  {{ group.goal }}</p>
+        <p>현재 인원 : {{ group.members }}</p>
+    </div>
+
+    <a href="{% url 'group:join_group' group.id %}" class="btn btn-black">그룹 가입</a>
+    </form>
+
+{% endblock %}

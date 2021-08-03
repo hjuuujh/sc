@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Study Check</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}">
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="menu">
+        <!-- <div class="container"> -->
+        <div class="group-main-text">
+            <!-- <div class="widget-title"> -->
+                <h4>그룹 이름</h4>
+            <!-- </div> -->
+            <!-- <div class="widget-content"> -->
+                <ul id="accordion">
+                    <h4>그룹 info</h4>
+                    <a href="{% url 'group:group_create' %}"><h4>그룹 생성</h4></a>
+                    <a href="{% url 'group:search_list' %}"><h4>그룹 검색</h4></a>
+                    <a href="{% url 'group:search_list' %}"><h4>그룹 삭제</h4></a>
+
+                </ul>
+            <!-- </div> -->
+        </div>
+        <!-- </div> -->
+    </div>
+</body>
+</html>

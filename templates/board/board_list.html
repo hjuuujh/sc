@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <nav id="topMenu">
+        <ul>
+            <li><a class="menuLink" role = "button" onclick="history.back()">돌아가기</a></li>
+        </ul>
+    </nav>
+
+<div class="container my-3">
+    <table class="table">
+        <thead>
+        <tr class="thead-dark">
+            <th style="width:50%">게시판 이름</th>
+            <th>삭제</th>
+            <th>생성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%if board_list %}
+        {%for board in board_list %}
+        <tr>
+<!--            <td>{{ forloop.counter }}</td>-->
+            <td> {{board.bname}}</td>
+            <td>
+            <a class = "btn btn-danger" href = "#" name = "deleteConfirm" role="button"
+            data-uri = "{% url 'board:board_delete' gid board.id  %}">
+                삭제</a>
+            </td>
+            <td>{{ board.create_date }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">게시판이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <a href="{% url 'board:board_create' gid %}" class="btn btn-primary">게시판 생성 </a>
+
+</div>
+
+<style>
+    #topMenu {
+        height: 30px;
+        width: 850px;
+        }
+    #topMenu ul li {
+        list-style: none;
+        color: white;
+        background-color: #2d2d2d;
+        float: left;
+        line-height: 30px;
+        vertical-align: middle;
+        text-align: center;
+         }
+    #topMenu .menuLink {
+        text-decoration:none;
+        color: white;
+        display: block;
+        width: 150px;
+        font-size: 12px;
+        font-weight: bold;
+        font-family: "Trebuchet MS", Dotum, Arial;
+        }
+    #topMenu .menuLink:hover {
+        background-color: #4d4d4d;
+        }
+</style>
+{%endblock%}
+
+{% block script %}
+<script type='text/javascript'>
+$("a[name=deleteConfirm]").on("click",function(e){
+    if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = $(this).data('uri');
+            }
+})
+</script>
+{% endblock %}

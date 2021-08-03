@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Study Check</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}">
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="menu">
+        <div class="group-main-text">
+                <h2>{{group.name}}</h2>
+                <ul id="accordion">
+                    <h5>{{group.info}}</h5>
+                    <h5>{{group.goal}}</h5>
+                    <h5>{{group.members}}</h5>
+                    <a href="{% url 'board:group_leave' group.id %}"><h5>그룹 탈퇴</h5></a>
+
+                    {% if request.user == group.uid %}
+                        <a href="{% url 'board:board_list' group.id %}"><h5>게시판 관리</h5></a>
+                    {% endif %}
+                </ul>
+        </div>
+    </div>
+</body>
+</html>
