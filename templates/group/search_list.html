@@ -28,7 +28,7 @@
         {%for group in search_list %}
         <tr>
             <td>
-                <a href="{% url 'group:group_detail' group.uid %}">{{ group.name }}</a>
+                <a href="{% url 'group:group_detail' group.uid.id %}">{{ group.name }}</a>
             </td>
             <td>{{ group.info }}</td>
             <td>{{ group.date }}</td>
@@ -112,4 +112,4 @@ $(document).ready(function(){
 </script>
 {% endblock %}
 {% endblock %}
-
+</div>

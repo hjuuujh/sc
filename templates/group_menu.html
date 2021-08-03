@@ -16,14 +16,14 @@
         <!-- <div class="container"> -->
         <div class="group-main-text">
             <!-- <div class="widget-title"> -->
-                <h4>그룹 이름</h4>
+                <h4>{{request.user}}</h4>
             <!-- </div> -->
             <!-- <div class="widget-content"> -->
                 <ul id="accordion">
-                    <h4>그룹 info</h4>
+                    <a href="{% url 'group:group_list' request.user.id%}"><h4>그룹 보기</h4></a>
                     <a href="{% url 'group:group_create' %}"><h4>그룹 생성</h4></a>
                     <a href="{% url 'group:search_list' %}"><h4>그룹 검색</h4></a>
-                    <a href="{% url 'group:search_list' %}"><h4>그룹 삭제</h4></a>
+                    <a href="{% url 'group:group_mgr' request.user.id %}"><h4>그룹 삭제</h4></a>
 
                 </ul>
             <!-- </div> -->

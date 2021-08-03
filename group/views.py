@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from group.forms import GroupForm
 from django.utils import timezone
@@ -26,8 +26,8 @@ class IndexView(generic.ListView):    #그룹 전체 리스트
 
 
 def group_page(request, pk):
-    board = Board.objects.filter(gid=pk)
-    return redirect('board:post_list', group_id=pk, pk=board[0].id)
+    board = Board.objects.filter(gid=pk).first()
+    return redirect('board:post_list', group_id=pk, pk=board.id)
 
 def Index(request):                       # 그룹 검색 페이지 함수
 
@@ -65,7 +65,15 @@ def group_create(request):                            # 그룹 생성
             group.members = 1
             group.date = timezone.now()
             group.save()
-            return redirect('group:group_list')
+
+            board = Board()
+            board.bname = "Study"
+            board.gid_id = group.id
+            board.create_date = timezone.now()
+            board.save()
+
+            join_group(request, group.id)
+            return redirect('group:group_list', pk=request.user.id)
     else:
         groupform = GroupForm()
         context = {'form': groupform}
@@ -98,6 +106,24 @@ def join_group(request, pk):
     selected_group = Group.objects.get(id=pk)
     selected_group.members += 1
     selected_group.save()
-    return redirect('group:group_list')
 
+    return redirect('group:group_list', pk = request.user.id)
 
+class GroupCreateView(generic.ListView):
+    model = Group
+    template_name = "group/group_mgr.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['group_create_list'] = Group.objects.filter(uid = self.request.user)
+        return context
+
+    # def get_queryset(self):
+    #     group_create_list = Group.objects.filter(uid = self.request.user)
+    #     print(group_create_list)
+    #     return group_create_list
+
+def group_delete(request, pk):
+    group = get_object_or_404(Group, id = pk)
+    group.delete()
+    return redirect('group:group_list', pk=request.user.id)

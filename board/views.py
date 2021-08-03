@@ -177,3 +177,9 @@ def board_delete(request, group_id, pk):
 def group_leave(request, group_id):
     join = get_object_or_404(Join, uid = request.user.id, gid = group_id)
     join.delete()
+
+    group = get_object_or_404(Group, id = group_id)
+    group.members -= 1
+    group.save()
+    return redirect('group:group_list', pk = request.user.id)
+
