@@ -2,18 +2,13 @@
 
 {% block content %}
 
-    <nav id="topMenu">
-        <ul>
-            <li><a class="menuLink" role = "button" onclick="history.back()">돌아가기</a></li>
-        </ul>
-    </nav>
 
 <div class="container my-3">
     <table class="table">
         <thead>
         <tr class="thead-dark">
             <th style="width:50%">그룹 이름</th>
-            <th>삭제</th>
+            <th>탈퇴</th>
             <th>생성일시</th>
         </tr>
         </thead>
@@ -26,7 +21,7 @@
             <td>
             <a class = "btn btn-danger" href = "#" name = "deleteConfirm" role="button"
             data-uri = "{% url 'group:group_leave' group.id %}">
-                삭제</a>
+                탈퇴</a>
             </td>
             <td>{{ group.date }}</td>
         </tr>
