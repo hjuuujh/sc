@@ -25,7 +25,7 @@ urlpatterns = [
     path('<int:pk>/', views.IndexView.as_view(), name='group_list'), # 현재는 전체 그룹 리스트 뜨는데, 사용자 가입한 그룹 리스트로 수정해야함
     path('group_create/', views.group_create, name='group_create'),
     path('<int:pk>/', views.DetailView.as_view(), name='group_detail'),   #그룹 검색 후 그룹 상세보기
-    path('<int:pk>/join', views.join_group, name='join_group'),
+    path('<int:pk>/join/', views.join_group, name='join_group'),
     path('search_list/', views.Index, name='search_list'),  # 그룹 검색
     path('group_page/<int:pk>', views.group_page, name='group_page')
 ]
