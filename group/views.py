@@ -6,6 +6,7 @@ from group.models import Group, Join
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -50,7 +51,7 @@ def group_create(request):                            # 그룹 생성
         form = GroupForm(request.POST)
         if form.is_valid():
             group = form.save(commit=False)
-            group.uid = request.user.id
+            group.uid = request.user
             group.members = 1
             group.date = timezone.now()
             group.save()
@@ -75,6 +76,8 @@ def group_create(request):                            # 그룹 생성
 #         context = {'form': my_form}
 #         return render(request, 'group/group_detail.html', context) 
 
+
+@login_required(login_url='common:login')
 def join_group(request, pk):
     join = Join()
     join.uid_id = request.user.id
