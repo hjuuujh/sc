@@ -127,3 +127,26 @@ def group_delete(request, pk):
     group = get_object_or_404(Group, id = pk)
     group.delete()
     return redirect('group:group_list', pk=request.user.id)
+
+class GroupJoinView(generic.ListView):
+    model = Group
+    template_name = "group/group_join.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['group_join_list'] = Group.objects.filter(
+            id__in=Join.objects.filter(uid=self.request.user)
+                .order_by('date')
+                .values('gid')
+        )
+        return context
+
+
+def group_leave(request, group_id):
+    join = get_object_or_404(Join, uid = request.user.id, gid = group_id)
+    join.delete()
+
+    group = get_object_or_404(Group, id = group_id)
+    group.members -= 1
+    group.save()
+    return redirect('group:group_list', pk = request.user.id)

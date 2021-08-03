@@ -149,7 +149,7 @@ class BoardListView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['board_list'] = Board.objects.filter(gid_id=self.kwargs['pk'])
-        context['gid'] = self.kwargs['pk']
+        context['group'] = Group.objects.get(id = self.kwargs['pk'])
         return context
 
 
@@ -174,12 +174,5 @@ def board_delete(request, group_id, pk):
     return redirect('board:board_list', pk = group_id)
 
 
-def group_leave(request, group_id):
-    join = get_object_or_404(Join, uid = request.user.id, gid = group_id)
-    join.delete()
 
-    group = get_object_or_404(Group, id = group_id)
-    group.members -= 1
-    group.save()
-    return redirect('group:group_list', pk = request.user.id)
 

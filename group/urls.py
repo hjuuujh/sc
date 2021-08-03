@@ -29,5 +29,7 @@ urlpatterns = [
     path('delete/<int:pk>/', views.group_delete, name='group_delete'),
     path('<int:pk>/join/', views.join_group, name='join_group'),
     path('search_list/', views.Index, name='search_list'),  # 그룹 검색
-    path('group_page/<int:pk>', views.group_page, name='group_page')
+    path('page/<int:pk>', views.group_page, name='group_page'),
+    path('join/list/', views.GroupJoinView.as_view(), name='group_join'),
+    path('leave/<int:group_id>', views.group_leave, name='group_leave'),
 ]

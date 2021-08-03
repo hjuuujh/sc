@@ -25,7 +25,7 @@
             <td> {{board.bname}}</td>
             <td>
             <a class = "btn btn-danger" href = "#" name = "deleteConfirm" role="button"
-            data-uri = "{% url 'board:board_delete' gid board.id  %}">
+            data-uri = "{% url 'board:board_delete' group.id board.id  %}">
                 삭제</a>
             </td>
             <td>{{ board.create_date }}</td>
@@ -38,7 +38,7 @@
         {% endif %}
         </tbody>
     </table>
-    <a href="{% url 'board:board_create' gid %}" class="btn btn-primary">게시판 생성 </a>
+    <a href="{% url 'board:board_create' group.id %}" class="btn btn-primary">게시판 생성 </a>
 
 </div>
 
