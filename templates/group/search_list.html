@@ -28,7 +28,7 @@
         {%for group in search_list %}
         <tr>
             <td>
-                <a href="{% url 'group:group_detail' group.uid.id %}">{{ group.name }}</a>
+                <a href="{% url 'group:group_detail' group.id %}">{{ group.name }}</a>
             </td>
             <td>{{ group.info }}</td>
             <td>{{ group.date }}</td>
@@ -36,7 +36,7 @@
         {% endfor %}
         {% else %}
         <tr>
-            <td colspan="3">게시글이 없습니다.</td>
+            <td colspan="3">그룹이 없습니다.</td>
         </tr>
         {% endif %}
         </tbody>

@@ -62,7 +62,7 @@ def group_create(request):                            # 그룹 생성
         if form.is_valid():
             group = form.save(commit=False)
             group.uid = request.user
-            group.members = 1
+            group.members = 0
             group.date = timezone.now()
             group.save()
 
