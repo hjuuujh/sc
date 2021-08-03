@@ -19,6 +19,7 @@
                     <h5>{{group.info}}</h5>
                     <h5>{{group.goal}}</h5>
                     <h5>{{group.members}}</h5>
+                    <a href="{% url 'group:group_list' group.id %}"><h5>그룹 보기</h5></a>
                     <a href="{% url 'board:group_leave' group.id %}"><h5>그룹 탈퇴</h5></a>
 
                     {% if request.user == group.uid %}

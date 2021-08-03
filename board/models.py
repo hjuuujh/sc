@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class Board(models.Model):
     bname = models.CharField(max_length=100)
-    gid = models.ForeignKey(Group, on_delete=models.CASCADE)
+    gid = models.ForeignKey(Group,on_delete=models.CASCADE)
     create_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

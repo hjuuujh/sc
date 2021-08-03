@@ -3,6 +3,7 @@ from django.views import generic
 from group.forms import GroupForm
 from django.utils import timezone
 from group.models import Group, Join
+from board.models import Board
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -15,8 +16,17 @@ class IndexView(generic.ListView):    #그룹 전체 리스트
     context_object_name = 'group_list'
 
     def get_queryset(self):
-        group_list = Group.objects.order_by('date')
+        group_list =  Group.objects.filter(
+            id__in=Join.objects.filter(uid=self.request.user)
+                .order_by('date')
+                .values('gid')
+        )
         return group_list
+
+
+def group_page(request, pk):
+    board = Board.objects.filter(gid=pk)
+    return redirect('board:post_list', group_id=pk, pk=board[0].id)
 
 def Index(request):                       # 그룹 검색 페이지 함수
 

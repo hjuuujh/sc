@@ -1,22 +1,32 @@
 {% extends 'group_base.html' %}
 {% block content %}
 
-<h2>그룹목록</h2>
-
-     {% if page_obj %}
-        {% for group in page_obj %}
-        <tr class="text-center">
-            <td> <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
-
-            <td class="text-left">
-                 <li><a href="{% url 'group:group_detail' group.id %}">{{ group.name }}</a></li>
+<table class="table">
+        <thead>
+        <tr class="thead-dark">
+            <th style="width:50%">그룹 이름</th>
+            <th>관리자</th>
+            <th>생성 일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%if group_list %}
+        {%for group in group_list %}
+        <tr>
+            <td>
+                <a href="{% url 'group:group_page' group.id %}">{{group.name}}</a>
             </td>
+            <td>{{ group.uid.username }}</td>
+            <td>{{ group.date }}</td>
         </tr>
         {% endfor %}
-        </ul>
-    {% else %}
-        <p>No groups are created.</p>
-    {% endif %}
+        {% else %}
+        <tr>
+            <td colspan="3">No groups are created.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
 
 
 <!--페이징처리 시작-->

@@ -24,10 +24,11 @@ class PostListView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['group'] = Group.objects.get(id=self.kwargs['group_id'])
         context['board_list'] = Board.objects.filter(gid_id= self.kwargs['group_id'])
         context['post_list'] = Post.objects.filter(bid_id=self.kwargs['pk'])
         context['bid'] = self.kwargs['pk']
-        context['group'] = Group.objects.get(id = self.kwargs['group_id'])
+
         return context
 
 
@@ -81,7 +82,6 @@ def post_modify(request, board_id, pk):
 # @login_required(login_url='common:login')
 def post_delete(request, group_id, board_id, pk):
     post = get_object_or_404(Post, pk=pk)
-    print(request.user)
     if request.user != post.uid:
         messages.error(request, '삭제권한이 없습니다')
         return redirect('board:post_detail', group_id=group_id, board_id=board_id, pk=post.id)
