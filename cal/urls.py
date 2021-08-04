@@ -12,16 +12,15 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from django.urls import path, include
-from config  import views
+# """
+
+from django.urls import path
+
+from cal import views
+
+app_name = 'cal'
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('group/', include('group.urls')),
-    path('board/', include('board.urls')),
-    path('', views.HomeView.as_view(), name='home'),
-    path('common/', include('common.urls')),
-    path('cal/',include('cal.urls')),
+    path('', views.index, name='index'), 
 ]
