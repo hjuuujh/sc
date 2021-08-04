@@ -34,6 +34,46 @@
     </table>
 
 </div>
+<!--페이징처리 시작-->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1"> << </a></li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}"> < </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#"> < </a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in page_obj.paginator.page_range %}
+        {% if page_number >= page_obj.number|add:-1 and page_number <= page_obj.number|add:1 %}
+            {% if page_number == page_obj.number %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}"> > </a>
+        </li>
+        <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"> >> </a> </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#"> > </a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
 
 {%endblock%}
 

@@ -20,16 +20,21 @@ class PostDetailView(generic.DetailView):
         return context
 
 class PostListView(generic.ListView):
-    model = Post
+    paginate_by = 7
+    context_object_name = 'post_list'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['group'] = Group.objects.get(id=self.kwargs['group_id'])
         context['board_list'] = Board.objects.filter(gid_id= self.kwargs['group_id'])
-        context['post_list'] = Post.objects.filter(bid_id=self.kwargs['pk'])
         context['bid'] = self.kwargs['pk']
 
         return context
+
+    def get_queryset(self):
+        post_list= Post.objects.filter(bid_id=self.kwargs['pk'])
+        return post_list
+
 
 
 @login_required(login_url='common:login')
@@ -44,7 +49,7 @@ def post_create(request, group_id ,board_id):
             post.create_date = timezone.now()
             post.save()
 
-            return redirect('board:post_detail', group_id=group_id, board_id=board_id,pk=post.id)
+            return redirect('board:post_detail', group_id=group_id, board_id=board_id, pk=post.id)
     else:
         form = PostForm()
         context = {'form': form, 'group': Group.objects.get(id=group_id)}
@@ -106,6 +111,7 @@ def comment_create(request, post_id):
     else:
         form = CommentForm()
     context = {'form': form, 'group': Group.objects.get(id=post.gid.id)}
+
     return render(request, 'board/comment_form.html', context)
 
 
@@ -164,7 +170,7 @@ def board_create(request, group_id):
             return redirect('board:board_list', pk=group_id)
     else:
         form = BoardForm()
-        context = {'form': form}
+        context = {'form': form, 'group': Group.objects.get(id=group_id)}
         return render(request, 'board/board_form.html', context)
 
 
@@ -174,5 +180,8 @@ def board_delete(request, group_id, pk):
     return redirect('board:board_list', pk = group_id)
 
 
+def to_post_list(request,group_id):
+    board = Board.objects.filter(gid=group_id).first()
+    return redirect('board:post_list', group_id=group_id, pk=board.id)
 
 

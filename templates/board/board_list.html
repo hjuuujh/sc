@@ -2,12 +2,6 @@
 
 {% block content %}
 
-    <nav id="topMenu">
-        <ul>
-            <li><a class="menuLink" role = "button" onclick="history.back()">돌아가기</a></li>
-        </ul>
-    </nav>
-
 <div class="container my-3">
     <table class="table">
         <thead>
@@ -42,33 +36,6 @@
 
 </div>
 
-<style>
-    #topMenu {
-        height: 30px;
-        width: 850px;
-        }
-    #topMenu ul li {
-        list-style: none;
-        color: white;
-        background-color: #2d2d2d;
-        float: left;
-        line-height: 30px;
-        vertical-align: middle;
-        text-align: center;
-         }
-    #topMenu .menuLink {
-        text-decoration:none;
-        color: white;
-        display: block;
-        width: 150px;
-        font-size: 12px;
-        font-weight: bold;
-        font-family: "Trebuchet MS", Dotum, Arial;
-        }
-    #topMenu .menuLink:hover {
-        background-color: #4d4d4d;
-        }
-</style>
 {%endblock%}
 
 {% block script %}

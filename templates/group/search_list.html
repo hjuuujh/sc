@@ -18,7 +18,7 @@
     <table class="table">
         <thead>
         <tr class="thead-dark">
-            <th style="width:50%">이름</th>
+            <th style="width:40%">이름</th>
                      <th>목표</th>
                     <th>생성 날짜</th>
         </tr>
@@ -46,13 +46,14 @@
 <ul class="pagination justify-content-center">
     <!-- 이전페이지 -->
     {% if search_list.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page=1"> << </a></li>
     <li class="page-item">
-        <a class="page-link" data-page="{{ search_list.previous_page_number }}" href="#">이전</a>
+        <a class="page-link" data-page="{{ search_list.previous_page_number }}" href="#"> < </a>
 
     </li>
     {% else %}
     <li class="page-item disabled">
-        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        <a class="page-link" tabindex="-1" aria-disabled="true" href="#"> < </a>
     </li>
     {% endif %}
 
@@ -78,11 +79,12 @@
     {% if search_list.has_next %}
     <li class="page-item">
 
-        <a class="page-link" data-page="{{ search_list.next_page_number }}" href="#">다음</a>
+        <a class="page-link" data-page="{{ search_list.next_page_number }}" href="#"> > </a>
     </li>
+    <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"> >> </a> </li>
     {% else %}
     <li class="page-item disabled">
-        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        <a class="page-link" tabindex="-1" aria-disabled="true" href="#"> > </a>
     </li>
     {% endif %}
 

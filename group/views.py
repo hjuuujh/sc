@@ -5,7 +5,7 @@ from django.utils import timezone
 from group.models import Group, Join
 from board.models import Board
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q, Subquery
+from django.db.models import Q
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 
@@ -95,18 +95,15 @@ def join_group(request, pk):
     return redirect('group:group_list', pk = request.user.id)
 
 class GroupCreateView(generic.ListView):
-    model = Group
+
     template_name = "group/group_mgr.html"
+    context_object_name = 'group_create_list'
+    paginate_by = 10
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['group_create_list'] = Group.objects.filter(uid = self.request.user)
-        return context
+    def get_queryset(self):
+        group_create_list = Group.objects.filter(uid=self.request.user)
+        return group_create_list
 
-    # def get_queryset(self):
-    #     group_create_list = Group.objects.filter(uid = self.request.user)
-    #     print(group_create_list)
-    #     return group_create_list
 
 def group_delete(request, pk):
     group = get_object_or_404(Group, id = pk)
@@ -116,15 +113,17 @@ def group_delete(request, pk):
 class GroupJoinView(generic.ListView):
     model = Group
     template_name = "group/group_join.html"
+    context_object_name = 'group_join_list'
+    paginate_by = 10
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['group_join_list'] = Group.objects.filter(
-                                    id__in=Join.objects.filter(uid=self.request.user)
-                                    .order_by('date')
-                                    .values('gid')
-                                    ).exclude(uid = self.request.user)
-        return context
+    def get_queryset(self):
+        group_join_list = Group.objects.filter(
+        id__in = Join.objects.filter(uid=self.request.user)
+        .order_by('date')
+        .values('gid')
+        ).exclude(uid=self.request.user
+        )
+        return group_join_list
 
 
 def group_leave(request, group_id):
