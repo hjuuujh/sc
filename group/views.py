@@ -8,7 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
-
+from django.db import IntegrityError
+from django.contrib import messages
 
 # Create your views here.
 class IndexView(generic.ListView):  # 그룹 전체 리스트
@@ -90,15 +91,21 @@ def group_create(request):  # 그룹 생성
 
 @login_required(login_url='common:login')
 def join_group(request, pk):
-    join = Join()
-    join.uid_id = request.user.id
-    join.gid_id = pk
-    join.date = timezone.now()
-    join.save()
 
-    selected_group = Group.objects.get(id=pk)
-    selected_group.members += 1
-    selected_group.save()
+    try:
+        join = Join()
+        join.uid_id = request.user.id
+        join.gid_id = pk
+        join.date = timezone.now()
+        join.save()
+
+        selected_group = Group.objects.get(id=pk)
+        selected_group.members += 1
+        selected_group.save()
+    except IntegrityError as e:
+        if 'UNIQUE constraint' in e.args[0]:
+            messages.warning(request, "이미 가입한 그룹입니다.")
+            return redirect('group:group_detail', pk=pk)
 
     return redirect('group:group_list', pk=request.user.id)
 

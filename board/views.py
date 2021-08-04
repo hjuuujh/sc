@@ -1,5 +1,4 @@
 from django.shortcuts import render , get_object_or_404, redirect
-
 from django.utils import timezone
 from django.views import generic
 from board.models import Board, Post, Comment
@@ -8,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from board.forms import PostForm, CommentForm, BoardForm
 from django.contrib.auth.models import User
 from django.db.models import Count, Q
+from django.contrib import messages
 
 class PostDetailView(generic.DetailView):
     model = Post
@@ -39,25 +39,23 @@ class PostListView(generic.ListView):
         search_type = self.request.GET.get('type', '')
         post_list = Post.objects.filter(bid_id=self.kwargs['pk'])
 
-        if search_keyword:
-            print(search_type)
-            if search_type == 'all':
-                post_list = post_list.filter(
-                    Q(title__icontains=search_keyword) |
-                    Q(contents__icontains=search_keyword)
-                ).distinct()
-            elif search_type == 'title':
-                post_list = post_list.filter(
-                    Q(title__icontains=search_keyword)
-                ).distinct()
-            elif search_type == 'content':
-                post_list = post_list.filter(
-                    Q(contents__icontains=search_keyword)
-                ).distinct()
-            elif search_type == 'author':
-                post_list = post_list.filter(
-                    Q(uid__username__icontains=search_keyword)
-                ).distinct()
+        if search_type == 'all':
+            post_list = post_list.filter(
+                Q(title__icontains=search_keyword) |
+                Q(contents__icontains=search_keyword)
+            ).distinct()
+        elif search_type == 'title':
+            post_list = post_list.filter(
+                Q(title__icontains=search_keyword)
+            ).distinct()
+        elif search_type == 'content':
+            post_list = post_list.filter(
+                Q(contents__icontains=search_keyword)
+            ).distinct()
+        elif search_type == 'author':
+            post_list = post_list.filter(
+                Q(uid__username__icontains=search_keyword)
+            ).distinct()
 
         return post_list
 
