@@ -39,23 +39,34 @@ class PostListView(generic.ListView):
         search_type = self.request.GET.get('type', '')
         post_list = Post.objects.filter(bid_id=self.kwargs['pk'])
 
-        if search_type == 'all':
-            post_list = post_list.filter(
-                Q(title__icontains=search_keyword) |
-                Q(contents__icontains=search_keyword)
-            ).distinct()
-        elif search_type == 'title':
-            post_list = post_list.filter(
-                Q(title__icontains=search_keyword)
-            ).distinct()
-        elif search_type == 'content':
-            post_list = post_list.filter(
-                Q(contents__icontains=search_keyword)
-            ).distinct()
-        elif search_type == 'author':
-            post_list = post_list.filter(
-                Q(uid__username__icontains=search_keyword)
-            ).distinct()
+        so = self.request.GET.get('so', 'recent')  # 정렬기준
+
+        # 정렬
+        
+        if so == 'popular':
+            post_list = Post.objects.annotate(num_comment=Count('comment')).order_by('-num_comment', '-create_date')
+        else:  # recent
+            post_list = Post.objects.order_by('-create_date')        
+
+        if search_keyword:
+            print(search_type)
+            if search_type == 'all':
+                post_list = post_list.filter(
+                    Q(title__icontains=search_keyword) |
+                    Q(contents__icontains=search_keyword)
+                ).distinct()
+            elif search_type == 'title':
+                post_list = post_list.filter(
+                    Q(title__icontains=search_keyword)
+                ).distinct()
+            elif search_type == 'content':
+                post_list = post_list.filter(
+                    Q(contents__icontains=search_keyword)
+                ).distinct()
+            elif search_type == 'author':
+                post_list = post_list.filter(
+                    Q(uid__username__icontains=search_keyword)
+                ).distinct()
 
         return post_list
 

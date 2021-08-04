@@ -11,9 +11,15 @@
     </nav>
 
 <div class="container my-3">
-
+    <div class="row justify-content-between my-3">
+        <div class="col-2">
+            <select class="form-control so">
+                <option value="recent" {% if so == 'recent' %}selected{% endif %}>최신순</option>
+                <option value="popular" {% if so == 'popular' %}selected{% endif %}>인기순</option>
+            </select>
+        </div>      
+    </div>
  
-
     <table class="table">
         <thead>
         <tr class="thead-dark">
@@ -54,7 +60,7 @@
     <form id="searchForm" method="get" action="{% url 'board:post_list' group.id bid %}">
         <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
         <input type="hidden" id="page" name="page" value="{{ page }}">
-
+        <input type="hidden" id="so" name="so" value="{{ so }}"> <!-- search fome에 정렬 기준을 입력할 수 있도록 -->
         <div style="float: right;" class="form-row">
         <div class="col" style="margin-top: 10px;" >
             <select style="width: 6em;" class="custom-select custom-select-md" name="type">
@@ -167,6 +173,12 @@ $(document).ready(function(){
         $("#page").val(1);  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
         $("#searchForm").submit();
         }
+    });
+    
+    $(".so").on('change', function() {
+        $("#so").val($(this).val());
+        $("#page").val(1);
+        $("#searchForm").submit();
     });
 });
 </script>
