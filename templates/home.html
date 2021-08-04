@@ -27,7 +27,7 @@
         <!-- navbar 했는데 홈 디자인 때문에 가려져서 안보임.  수정해야할듯! -->
         <nav class="nav justify-content-end bg-light">
          <a class="navbar-brand" href="/">Home</a>
-         <a class="navbar-brand" href="{% url 'common:login' %}">My Group</a>
+         <a class="navbar-brand" href="{% url 'group:group_list' request.user.id %}">My Group</a>
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
            <span class="navbar-toggler-icon"></span>
          </button>
@@ -35,7 +35,7 @@
 
          </div>
        </nav>
-
+<!--                                                        -->
       <div class="main">
          <div class="col-md-6 col-sm-12">
             <div class="login-form">   <!-- 이부분 class 이름 바꾸기-->
