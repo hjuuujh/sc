@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'group.apps.GroupConfig',
     'common.apps.CommonConfig',
     'board.apps.BoardConfig',
+    'cal.apps.CalConfig',
 ]
 
 MIDDLEWARE = [
