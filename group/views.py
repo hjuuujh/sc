@@ -30,7 +30,7 @@ def group_page(request, pk):
     return redirect('board:post_list', group_id=pk, pk=board.id)
 
 
-def Index(request):  # 그룹 검색 페이지 함수
+def index(request):  # 그룹 검색 페이지 함수
 
     page = request.GET.get('page', '1')
     kw = request.GET.get('kw', '')
@@ -38,8 +38,7 @@ def Index(request):  # 그룹 검색 페이지 함수
     so = request.GET.get('so', 'recent')  # 정렬기준
 
     if so == 'member':
-        search_list = Group.objects.all().annotate(num_members=Count('members')).order_by('-num_members')
-
+        search_list = Group.objects.order_by('-members')
     else:     # recent
         search_list = Group.objects.order_by('-date')
 
