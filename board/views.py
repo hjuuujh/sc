@@ -1,5 +1,4 @@
 from django.shortcuts import render , get_object_or_404, redirect
-
 from django.utils import timezone
 from django.views import generic
 from board.models import Board, Post, Comment
@@ -8,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from board.forms import PostForm, CommentForm, BoardForm
 from django.contrib.auth.models import User
 from django.db.models import Count, Q
+from django.contrib import messages
 
 class PostDetailView(generic.DetailView):
     model = Post

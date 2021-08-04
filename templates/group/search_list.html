@@ -27,8 +27,8 @@
     <table class="table">
         <thead>
         <tr class="thead-dark">
-            <th style="width:40%">이름</th>
-                    <th>인원</th>
+            <th style="width:40%">그룹 이름</th>
+                    <th style="width:10%">인원</th>
                      <th>목표</th>
                     <th>생성 날짜</th>
         </tr>
@@ -120,9 +120,20 @@ $(document).ready(function(){
     });
 
     $("#btn_search").on('click', function() {
-        $("#kw").val($(".kw").val());
-        $("#page").val(1);
+        var searchText = $(".kw").val()
+        if(searchText == 0){
+            alert('검색어를 입력해주세요');
+            e.preventDefault();
+        }
+        else if(searchText ==1){
+            alert('두 글자이상 입력하세요');
+            e.preventDefault();
+        }
+        else{
+        $("#kw").val(searchText);
+        $("#page").val(1);  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
         $("#searchForm").submit();
+        }
     });
 
     $(".so").on('change', function() {

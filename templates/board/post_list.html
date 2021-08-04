@@ -72,14 +72,14 @@
                 <option value="author">작성자</option>
             </select>
         </div>
-        <div class="col-4 input-group" >
             <input type="text" class="form-control kw" style="width: 15em;" placeholder="검색어를 입력해주세요." value="{{ kw|default_if_none:'' }}">
-        </div>
+
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary"  type="button" id="btn_search">검색</button>
+            <button class="btn btn-outline-secondary"  type="button" id="btn_search" >검색</button>
         </div>
         </div>
     </form>
+
 <!--페이징처리 시작-->
     <ul class="pagination justify-content-center">
         <!-- 이전페이지 -->
@@ -161,9 +161,20 @@ $(document).ready(function(){
     });
 
     $("#btn_search").on('click', function() {
-        $("#kw").val($(".kw").val());
+        var searchText = $(".kw").val()
+        if(searchText == 0){
+            alert('검색어를 입력해주세요');
+            e.preventDefault();
+        }
+        else if(searchText == 1){
+            alert('두 글자이상 입력하세요');
+            e.preventDefault();
+        }
+        else{
+        $("#kw").val(searchText);
         $("#page").val(1);  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
         $("#searchForm").submit();
+        }
     });
     
     $(".so").on('change', function() {
