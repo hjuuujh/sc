@@ -5,7 +5,7 @@ from django.utils import timezone
 from group.models import Group, Join
 from board.models import Board
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.db.models import Q, Subquery
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 
@@ -80,21 +80,6 @@ def group_create(request):                            # 그룹 생성
     return render(request, 'group/group_form.html', context)
 
 
-# def join_group(request):
-#     my_form = JoinForm()
-#     if request.method == 'POST':
-#         join = my_form.save(commit=False)
-#         # join.uid = request.user  
-#         # join.members += 1
-#         join.join_date = timezone.now()
-#         join.save()
-#         return redirect('group:group_list')
-#     else:
-#         my_form = JoinForm()
-#         context = {'form': my_form}
-#         return render(request, 'group/group_detail.html', context) 
-
-
 @login_required(login_url='common:login')
 def join_group(request, pk):
     join = Join()
@@ -135,10 +120,10 @@ class GroupJoinView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['group_join_list'] = Group.objects.filter(
-            id__in=Join.objects.filter(uid=self.request.user)
-                .order_by('date')
-                .values('gid')
-        )
+                                    id__in=Join.objects.filter(uid=self.request.user)
+                                    .order_by('date')
+                                    .values('gid')
+                                    ).exclude(uid = self.request.user)
         return context
 
 
