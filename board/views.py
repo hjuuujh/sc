@@ -11,13 +11,44 @@ from itertools import chain
 
 class PostDetailView(generic.DetailView):
     model = Post
+    paginate_by = 15
+    template_name = 'board/post_list.html'
+    context_object_name = 'post_list'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['post_detail'] = Post.objects.get(id=self.kwargs['pk'])
         context['group'] = Group.objects.get(id = self.kwargs['group_id'])
 
+         # 검색위해 추가
+        search_keyword = self.request.GET.get('q', '')
+        search_type = self.request.GET.get('type', '')
+
+        if len(search_keyword) > 1 :
+            context['q'] = search_keyword
+        context['type'] = search_type
+
         return context
+ 
+    # 검색위해 추가
+    def get_queryset(self):
+        search_keyword = self.request.GET.get('q', '')
+        search_type = self.request.GET.get('type', '')
+        post_list = Post.objects.order_by('-create_date')
+
+        if search_keyword :
+            if len(search_keyword) > 1 :
+                if search_type == 'all':
+                    search_post_list = post_list.filter(Q (title__icontains=search_keyword) | Q (contents__icontains=search_keyword))
+                elif search_type == 'title':
+                    search_post_list = post_list.filter(title__icontains=search_keyword)    
+                elif search_type == 'contents':
+                    search_post_list = post_list.filter(contents__icontains=search_keyword)    
+ 
+                return search_post_list
+            else:
+                messages.error(self.request, '검색어는 2글자 이상 입력해주세요.')
+        return post_list        
 
 class PostListView(generic.ListView):
     model = Post
