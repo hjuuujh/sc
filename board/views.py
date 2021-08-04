@@ -7,7 +7,7 @@ from group.models import Group, Join
 from django.contrib.auth.decorators import login_required
 from board.forms import PostForm, CommentForm, BoardForm
 from django.contrib.auth.models import User
-from itertools import chain
+from django.db.models import Count, Q
 
 class PostDetailView(generic.DetailView):
     model = Post
@@ -19,18 +19,47 @@ class PostDetailView(generic.DetailView):
 
         return context
 
+
 class PostListView(generic.ListView):
-    model = Post
+    paginate_by = 5
+    context_object_name = 'post_list'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['group'] = Group.objects.get(id=self.kwargs['group_id'])
         context['board_list'] = Board.objects.filter(gid_id= self.kwargs['group_id'])
-        context['post_list'] = Post.objects.filter(bid_id=self.kwargs['pk'])
         context['bid'] = self.kwargs['pk']
 
         return context
 
+        # 검색위해 추가
+    def get_queryset(self):
+        search_page = self.request.GET.get('page', '1')
+        search_keyword = self.request.GET.get('kw', '')
+        search_type = self.request.GET.get('type', '')
+        post_list = Post.objects.filter(bid_id=self.kwargs['pk'])
+
+        if search_keyword:
+            print(search_type)
+            if search_type == 'all':
+                post_list = post_list.filter(
+                    Q(title__icontains=search_keyword) |
+                    Q(contents__icontains=search_keyword)
+                ).distinct()
+            elif search_type == 'title':
+                post_list = post_list.filter(
+                    Q(title__icontains=search_keyword)
+                ).distinct()
+            elif search_type == 'content':
+                post_list = post_list.filter(
+                    Q(contents__icontains=search_keyword)
+                ).distinct()
+            elif search_type == 'author':
+                post_list = post_list.filter(
+                    Q(uid__username__icontains=search_keyword)
+                ).distinct()
+
+        return post_list
 
 @login_required(login_url='common:login')
 def post_create(request, group_id ,board_id):
@@ -44,7 +73,7 @@ def post_create(request, group_id ,board_id):
             post.create_date = timezone.now()
             post.save()
 
-            return redirect('board:post_detail', group_id=group_id, board_id=board_id,pk=post.id)
+            return redirect('board:post_detail', group_id=group_id, board_id=board_id, pk=post.id)
     else:
         form = PostForm()
         context = {'form': form, 'group': Group.objects.get(id=group_id)}
@@ -106,6 +135,7 @@ def comment_create(request, post_id):
     else:
         form = CommentForm()
     context = {'form': form, 'group': Group.objects.get(id=post.gid.id)}
+
     return render(request, 'board/comment_form.html', context)
 
 
@@ -164,7 +194,7 @@ def board_create(request, group_id):
             return redirect('board:board_list', pk=group_id)
     else:
         form = BoardForm()
-        context = {'form': form}
+        context = {'form': form, 'group': Group.objects.get(id=group_id)}
         return render(request, 'board/board_form.html', context)
 
 
@@ -174,5 +204,8 @@ def board_delete(request, group_id, pk):
     return redirect('board:board_list', pk = group_id)
 
 
+def to_post_list(request,group_id):
+    board = Board.objects.filter(gid=group_id).first()
+    return redirect('board:post_list', group_id=group_id, pk=board.id)
 
 

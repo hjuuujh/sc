@@ -23,6 +23,9 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ['-create_date']
+
 
 class Comment(models.Model):
     pid = models.ForeignKey(Post, on_delete=models.CASCADE)

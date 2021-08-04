@@ -14,6 +14,9 @@ class Group(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['-id']
+
 
 class Join(models.Model):
     uid = models.ForeignKey(User, on_delete=models.CASCADE)  # user 아이디
