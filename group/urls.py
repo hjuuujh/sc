@@ -22,7 +22,7 @@ app_name = 'group'
 
 
 urlpatterns = [
-    path('joined/<int:pk>/', views.IndexView.as_view(), name='group_list'), # 현재는 전체 그룹 리스트 뜨는데, 사용자 가입한 그룹 리스트로 수정해야함
+    path('joined/<int:pk>/', views.IndexView.as_view(), name='group_list'), # 가입한 그룹 보기
     path('create/', views.group_create, name='group_create'),
     path('<int:pk>/', views.DetailView.as_view(), name='group_detail'),   #그룹 검색 후 그룹 상세보기
     path('mgr/<int:pk>/', views.GroupCreateView.as_view(), name='group_mgr'),
