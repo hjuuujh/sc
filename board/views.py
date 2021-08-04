@@ -7,7 +7,7 @@ from group.models import Group, Join
 from django.contrib.auth.decorators import login_required
 from board.forms import PostForm, CommentForm, BoardForm
 from django.contrib.auth.models import User
-from itertools import chain
+from django.db.models import Count, Q
 
 class PostDetailView(generic.DetailView):
     model = Post
@@ -19,8 +19,9 @@ class PostDetailView(generic.DetailView):
 
         return context
 
+
 class PostListView(generic.ListView):
-    paginate_by = 7
+    paginate_by = 5
     context_object_name = 'post_list'
 
     def get_context_data(self, **kwargs):
@@ -31,11 +32,34 @@ class PostListView(generic.ListView):
 
         return context
 
+        # 검색위해 추가
     def get_queryset(self):
-        post_list= Post.objects.filter(bid_id=self.kwargs['pk'])
+        search_page = self.request.GET.get('page', '1')
+        search_keyword = self.request.GET.get('kw', '')
+        search_type = self.request.GET.get('type', '')
+        post_list = Post.objects.filter(bid_id=self.kwargs['pk'])
+
+        if search_keyword:
+            print(search_type)
+            if search_type == 'all':
+                post_list = post_list.filter(
+                    Q(title__icontains=search_keyword) |
+                    Q(contents__icontains=search_keyword)
+                ).distinct()
+            elif search_type == 'title':
+                post_list = post_list.filter(
+                    Q(title__icontains=search_keyword)
+                ).distinct()
+            elif search_type == 'content':
+                post_list = post_list.filter(
+                    Q(contents__icontains=search_keyword)
+                ).distinct()
+            elif search_type == 'author':
+                post_list = post_list.filter(
+                    Q(uid__username__icontains=search_keyword)
+                ).distinct()
+
         return post_list
-
-
 
 @login_required(login_url='common:login')
 def post_create(request, group_id ,board_id):
