@@ -17,13 +17,25 @@
     <body>
         <div class="sidenav">
          <div class="login-main-text">       <!-- 이부분 class 이름 바꾸기-->
-            <h2>Study Check</h2>
+            <h1>Study Check</h1> <br>
             <p>코로나로 인해 비대면이 활동이 활성화 되면서 , <br> 
                혼자 공부할 수 없는 환경에서 다른사람들과 함께 내용을 공유하거나<br> 
                강제성이 필요한 사람들을 위한 곳 입니다.
             </p>
          </div>
       </div>
+        <!-- navbar 했는데 홈 디자인 때문에 가려져서 안보임.  수정해야할듯! -->
+        <nav class="nav justify-content-end bg-light">
+         <a class="navbar-brand" href="/">Home</a>
+         <a class="navbar-brand" href="{% url 'common:login' %}">My Group</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+         </div>
+       </nav>
+
       <div class="main">
          <div class="col-md-6 col-sm-12">
             <div class="login-form">   <!-- 이부분 class 이름 바꾸기-->
