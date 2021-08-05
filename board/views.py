@@ -37,15 +37,14 @@ class PostListView(generic.ListView):
         search_page = self.request.GET.get('page', '1')
         search_keyword = self.request.GET.get('kw', '')
         search_type = self.request.GET.get('type', '')
-        post_list = Post.objects.filter(bid_id=self.kwargs['pk'])
         so = self.request.GET.get('so', 'recent')  # 정렬기준
 
         # 정렬
-        
+
         if so == 'popular':
-            post_list = Post.objects.annotate(num_comment=Count('comment')).order_by('-num_comment','-create_date')
+            post_list = Post.objects.filter(bid_id=self.kwargs['pk']).annotate(num_comment=Count('comment')).order_by('-num_comment','-create_date')
         else:  # recent
-            post_list = Post.objects.order_by('-create_date')        
+            post_list = Post.objects.filter(bid_id=self.kwargs['pk']).order_by('-create_date')
 
         if search_keyword:
             print(search_type)
@@ -187,6 +186,7 @@ class BoardListView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['board_list'] = Board.objects.filter(gid_id=self.kwargs['pk'])
+        context['bid'] = context['board_list'][0].id
         context['group'] = Group.objects.get(id = self.kwargs['pk'])
         return context
 

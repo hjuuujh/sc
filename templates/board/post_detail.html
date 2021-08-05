@@ -1,6 +1,8 @@
 {% extends 'board_base.html' %} <!-- base_board/html 아니어도 되는지 확인 -->
 
 {% block content %}
+{{ post.update_counter }}
+<!-- detail 열때마다 조회수 증가 -->
 <div class="container">
     <div class="card">
         <div class="card-body" >
@@ -56,7 +58,7 @@
         <textarea name="contents" id="contents" rows="15" class="form-control" ></textarea>
     </div>
     <input type="submit" value="댓글등록" class="btn btn-dark" >
-    <button type="button"  class="btn btn-outline-warning btn float-right" onClick="location.href ='board/post_list' ">목록으로</button>
+    <button type="button"  class="btn btn-outline-warning btn float-right" onClick="location.href ='{% url 'board:post_list' post.gid.id post.bid.id  %}' ">목록으로</button>
     </form>
 </div>
 
