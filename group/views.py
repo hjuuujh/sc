@@ -93,18 +93,17 @@ def group_create(request):  # 그룹 생성
 def join_group(request, pk):
 
     try:
-        join = Join()
-        join.uid_id = request.user.id
-        join.gid_id = pk
-        join.date = timezone.now()
-        join.save()
-
         selected_group = Group.objects.get(id=pk)
-        saved_max_members = Group.objects.get(id=pk).max_members
-        if selected_group.members >= saved_max_members:
-            messages.error(request, "가입 인원이 마감되어 가입이 불가합니다.")
+        if selected_group.members == selected_group.max_members:
+            messages.warning(request, "가입 인원이 마감되어 가입이 불가합니다.")
             return redirect('group:group_detail', pk=pk)
         else:
+            join = Join()
+            join.uid_id = request.user.id
+            join.gid_id = pk
+            join.date = timezone.now()
+            join.save()
+
             selected_group.members += 1
             selected_group.save()
             return redirect('group:group_detail', pk=pk)

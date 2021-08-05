@@ -47,7 +47,6 @@ class PostListView(generic.ListView):
             post_list = Post.objects.filter(bid_id=self.kwargs['pk']).order_by('-create_date')
 
         if search_keyword:
-            print(search_type)
             if search_type == 'all':
                 post_list = post_list.filter(
                     Q(title__icontains=search_keyword) |

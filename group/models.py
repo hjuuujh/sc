@@ -26,6 +26,5 @@ class Join(models.Model):
     gid = models.ForeignKey(Group, on_delete=models.CASCADE)  # 그룹
     date = models.DateTimeField(default=timezone.now)
 
-
     class Meta:
         unique_together = (("uid","gid"),)
