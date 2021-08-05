@@ -39,6 +39,9 @@
 <!--            <td>{{ forloop.counter }}</td>-->
             <td>
                 <a href="{% url 'board:post_detail' post.gid.id post.bid.id post.id %}">{{post.title}}</a>
+                {% if post.comment_set.count > 0 %}
+                <span class="text-danger small ml-2">{{ post.comment_set.count }}</span>
+                {% endif %}
             </td>
             <td>{{ post.uid.username }}</td>
             <td>{{ post.create_date }}</td>
