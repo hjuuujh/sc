@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 
 
 class Group(models.Model):
@@ -9,6 +11,7 @@ class Group(models.Model):
     info = models.CharField(max_length=200)  # 그룹 소개
     goal = models.CharField(max_length=300)  # 그룹 목표
     members = models.IntegerField(default=0)  # 그룹 인원수
+    max_members = models.IntegerField(default=0)
     date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

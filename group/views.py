@@ -100,8 +100,14 @@ def join_group(request, pk):
         join.save()
 
         selected_group = Group.objects.get(id=pk)
-        selected_group.members += 1
-        selected_group.save()
+        saved_max_members = Group.objects.get(id=pk).max_members
+        if selected_group.members >= saved_max_members:
+            messages.error(request, "가입 인원이 마감되어 가입이 불가합니다.")
+            return redirect('group:group_detail', pk=pk)
+        else:
+            selected_group.members += 1
+            selected_group.save()
+            return redirect('group:group_detail', pk=pk)
 
     except IntegrityError as e:
         if 'UNIQUE constraint' in e.args[0]:
