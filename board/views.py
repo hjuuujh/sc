@@ -1,4 +1,4 @@
-from django.shortcuts import render , get_object_or_404
+from django.shortcuts import render , get_object_or_404, redirect
 from django.utils import timezone
 from django.views import generic
 from board.models import Board, Post, Comment
@@ -40,7 +40,7 @@ class PostListView(generic.ListView):
         so = self.request.GET.get('so', 'recent')  # 정렬기준
 
         # 정렬
-        
+
         if so == 'popular':
             post_list = Post.objects.filter(bid_id=self.kwargs['pk']).annotate(num_comment=Count('comment')).order_by('-num_comment','-create_date')
         else:  # recent
