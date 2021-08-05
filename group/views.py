@@ -102,6 +102,7 @@ def join_group(request, pk):
         selected_group = Group.objects.get(id=pk)
         selected_group.members += 1
         selected_group.save()
+
     except IntegrityError as e:
         if 'UNIQUE constraint' in e.args[0]:
             messages.warning(request, "이미 가입한 그룹입니다.")

@@ -27,7 +27,9 @@
         <!-- navbar 했는데 홈 디자인 때문에 가려져서 안보임.  수정해야할듯! -->
         <nav class="nav justify-content-end bg-light">
          <a class="navbar-brand" href="/">Home</a>
-         <a class="navbar-brand" href="{% url 'group:group_list' request.user.id %}">My Group</a>
+            <!-- home에서 로그인안하면 에러  -->
+
+
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
            <span class="navbar-toggler-icon"></span>
          </button>

@@ -1,6 +1,6 @@
 from cal.forms import EventForm
 from datetime import datetime, timedelta
-from django.shortcuts import get_object_or_404, render, get_list_or_404
+from django.shortcuts import get_object_or_404, render, get_list_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse
@@ -19,8 +19,10 @@ class CalendarView(generic.ListView):
         context = super().get_context_data(**kwargs)
         d = get_date(self.request.GET.get('month', None))
         cal = Calendar(d.year, d.month)
-        html_cal = cal.formatmonth(withyear=True)
+        html_cal = cal.formatmonth(pk=self.kwargs['pk'],withyear=True)
+        context['gid'] = self.kwargs['pk']
         context['calendar'] = mark_safe(html_cal)
+        print(context['calendar'])
         context['prev_month'] = prev_month(d)
         context['next_month'] = next_month(d)
         return context
@@ -48,15 +50,31 @@ def next_month(d):
     return month
 
 
-def event(request, event_id=None):
+def event_new(request, pk):
     instance = Event()
-    if event_id:
-        instance = get_object_or_404(Event, pk=event_id)
-    else:
-        instance = Event()
 
     form = EventForm(request.POST or None, instance = instance)
     if request.POST and form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse('cal:calendar'))
-    return render(request, 'cal/event.html', {'form': form})
+        cal = form.save(commit=False)
+        cal.gid_id = pk
+        cal.save()
+        url = reverse('cal:calendar', kwargs={'pk': pk})
+        return HttpResponseRedirect(url)
+    context = {'form': form, 'pk': pk}
+    return render(request, 'cal/event.html', context)
+
+def event_edit(request, event_id=None):
+    instance = get_object_or_404(Event, pk=event_id)
+
+    form = EventForm(request.POST or None, instance = instance)
+    if request.POST and form.is_valid():
+        cal = form.save(commit=False)
+        pk = cal.gid.id
+        cal.save()
+        url = reverse('cal:calendar', kwargs={'pk': pk})
+        return HttpResponseRedirect(url)
+    else:
+        form = EventForm(instance=instance)
+        pk = instance.gid.id
+        context = {'form': form, 'pk':pk}
+    return render(request, 'cal/event.html', context)
