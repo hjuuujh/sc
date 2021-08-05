@@ -22,7 +22,6 @@ class CalendarView(generic.ListView):
         html_cal = cal.formatmonth(pk=self.kwargs['pk'],withyear=True)
         context['gid'] = self.kwargs['pk']
         context['calendar'] = mark_safe(html_cal)
-        print(context['calendar'])
         context['prev_month'] = prev_month(d)
         context['next_month'] = next_month(d)
         return context

@@ -37,9 +37,12 @@ body{
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
 }
-.menu ul li.active{
+.active{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
     background: rgb(0, 0, 0);
 }
+
 .menu ul li a{
     position: relative;
     display: block;
