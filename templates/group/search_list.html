@@ -10,17 +10,29 @@
             </select>
         </div>
 <!-- ------------------------------------------------------------------------->
-
-        <div class="col-4 input-group">
+        <div class="col-4 input-group" >
             <input type="text" class="form-control kw" value="{{ kw|default_if_none:'' }}">
-            <div class="input-group-append">
+            <div class="input-group-append" style="float:right;">
                 <button class="btn btn-outline-secondary" type="button" id="btn_search">검색</button>
+            <form id="searchForm" method="get" action="{% url 'group:search_list' %}">
+                <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
+                <input type="hidden" id="page" name="page" value="{{ page }}">
+                <input type="hidden" id="so" name="so" value="{{ so }}">
+                    <div class="col" style="margin-top: 10px;" >
+                        <div style="text-align:left; display:block;" class="form-row">        <!--검색바 위치 수정 예정-->
+                    <select style="width: 6em;" class="custom-select custom-select-md" name="type">
+                        <option value="name">제목</option>
+                        <option value="goal">목표</option>
+                        <option value="info">내용</option>
+                        <option value="all">전체</option>
+                    </select>
+                </div>
+            </form>
             </div>
         </div>
     </div>
 
 
-<h1>그룹 검색</h1>
 <br>
 
 <div class="container my-3">
@@ -47,7 +59,7 @@
         {% endfor %}
         {% else %}
         <tr>
-            <td colspan="3">그룹이 없습니다.</td>
+            <td colspan="3">검색결과가 없습니다.</td>
         </tr>
         {% endif %}
         </tbody>
@@ -104,12 +116,6 @@
 
 </ul>
 <!-- 페이징처리 끝 -->
-
-<form id="searchForm" method="get" action="{% url 'group:search_list' %}">
-    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
-    <input type="hidden" id="page" name="page" value="{{ page }}">
-    <input type="hidden" id="so" name="so" value="{{ so }}">     <!-- 게시글 정렬 기준-->
-</form>
 <!-- 자바 검색 기능  -->
 {% block script %}
 <script type='text/javascript'>
