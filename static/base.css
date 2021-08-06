@@ -150,3 +150,9 @@ body {
     background-color: rgba(66, 65, 65, 0.945);
     margin-top : 150px;
 }
+
+.link-text{
+    margin-top: 20%;
+    padding: 0px;
+    color: rgb(0, 0, 0);
+}

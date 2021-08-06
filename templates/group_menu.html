@@ -14,7 +14,7 @@
 
 <body>
     <div class="group-main-text">
-        <h4>{{request.user}}</h4>
+        <h4><a class="group-main-text" href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a></h4>
     </div>
     <div class="menu">
         <ul>
