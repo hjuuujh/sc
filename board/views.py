@@ -21,7 +21,7 @@ class PostDetailView(generic.DetailView):
 
 
 class PostListView(generic.ListView):
-    paginate_by = 5
+    paginate_by = 1
     context_object_name = 'post_list'
 
     def get_context_data(self, **kwargs):
