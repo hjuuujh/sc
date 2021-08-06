@@ -84,6 +84,7 @@
             <button class="btn btn-outline-secondary"  type="button" id="btn_search" >검색</button>
         </div>
         </div>
+
     </form>
 
 <!--페이징처리 시작-->
@@ -135,7 +136,7 @@
     #posttitle {
         color : black;
     }
-    
+
     #topMenu {
         height: 30px;
         width: 850px;
@@ -187,6 +188,7 @@ $(document).ready(function(){
         $("#searchForm").submit();
         }
     });
+    
     $(".so").on('change', function() {
             $("#so").val($(this).val());
             $("#page").val(1);
