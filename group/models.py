@@ -28,3 +28,13 @@ class Join(models.Model):
 
     class Meta:
         unique_together = (("uid","gid"),)
+
+
+class Join_Request(models.Model):
+    uid = models.ForeignKey(User, on_delete=models.CASCADE)  # user 아이디
+    gid = models.ForeignKey(Group, on_delete=models.CASCADE)  # 그룹
+    motivation = models.CharField(max_length=100)
+    date = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together = (("uid","gid"),)

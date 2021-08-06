@@ -1,0 +1,92 @@
+{% extends 'group_base.html' %}
+
+{% block content %}
+
+<div class="container my-3">
+    <table class="table">
+        <thead>
+        <tr class="thead-dark">
+            <th style="width:20%">그룹 이름</th>
+            <th>유저 이름</th>
+            <th>지원동기</th>
+            <th>신청일시</th>
+            <th>승인</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%if group_request_list %}
+        {%for request in group_request_list %}
+        <tr>
+<!--            <td>{{ forloop.counter }}</td>-->
+            <td> {{request.gid.name}}</td>
+            <td> {{request.uid.username}}</td>
+            <td>{{ request.motivation }}</td>
+            <td>{{ request.date }}</td>
+            <td>
+            <a class = "btn btn-danger" href = "#" name = "requestApprove" role="button"
+            data-uri = "{% url 'group:group_join_request'%}">
+                승인</a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">요청이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+</div>
+<!--페이징처리 시작-->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1"> << </a></li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}"> < </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#"> < </a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in page_obj.paginator.page_range %}
+        {% if page_number >= page_obj.number|add:-1 and page_number <= page_obj.number|add:1 %}
+            {% if page_number == page_obj.number %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}"> > </a>
+        </li>
+        <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"> >> </a> </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#"> > </a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+
+{%endblock%}
+
+{% block script %}
+<script type='text/javascript'>
+$("a[name=requestApprove]").on("click",function(e){
+    if(confirm("승인하시겠습니까?")) {
+                location.href = $(this).data('uri');
+            }
+})
+</script>
+{% endblock %}

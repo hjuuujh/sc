@@ -22,14 +22,17 @@ app_name = 'group'
 
 
 urlpatterns = [
-    path('joined/<int:pk>/', views.IndexView.as_view(), name='group_list'), # 가입한 그룹 보기
+    path('joined/', views.IndexView.as_view(), name='group_list'), # 가입한 그룹 보기
     path('create/', views.group_create, name='group_create'),
     path('<int:pk>/', views.DetailView.as_view(), name='group_detail'),   #그룹 검색 후 그룹 상세보기
-    path('mgr/<int:pk>/', views.GroupCreateView.as_view(), name='group_mgr'),
+    path('mgr/', views.GroupCreateView.as_view(), name='group_mgr'),
     path('delete/<int:pk>/', views.group_delete, name='group_delete'),
     path('<int:pk>/join/', views.join_group, name='join_group'),
     path('search_list/', views.index, name='search_list'),  # 그룹 검색
     path('page/<int:pk>', views.group_page, name='group_page'),
     path('join/list/', views.GroupJoinView.as_view(), name='group_join'),
     path('leave/<int:group_id>', views.group_leave, name='group_leave'),
+    path('request/<int:group_id>', views.join_request, name='join_request'),
+    path('join/request/', views.GroupJoinRequestView.as_view(), name='group_join_request'),
+    path('approve/', views.approve_request, name='approve_request'),
 ]

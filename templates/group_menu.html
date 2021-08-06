@@ -19,7 +19,7 @@
     <div class="menu">
         <ul>
             <li>
-                <a href="{% url 'group:group_list' request.user.id%}" class="">
+                <a href="{% url 'group:group_list'%}" class="">
                 <span class="icon"><ion-icon name="list-circle-outline"></ion-icon></span>
                 <span class="title">그룹 보기</span>
                 </a>
@@ -37,7 +37,7 @@
                 </a>
             </li>
             <li>
-                <a href="{% url 'group:group_mgr' request.user.id %}" class="">
+                <a href="{% url 'group:group_mgr'%}" class="">
                 <span class="icon"><ion-icon name="trash-outline"></ion-icon></span>
                 <span class="title">그룹 삭제</span>
                 </a>
@@ -46,6 +46,12 @@
                 <a href="{% url 'group:group_join' %}" class="">
                 <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                 <span class="title">그룹 탈퇴</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'group:group_join_request'%}" class="">
+                <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                <span class="title">그룹 승인</span>
                 </a>
             </li>
         </ul>
@@ -65,12 +71,6 @@
             }
         });
     });
-
-
-
-
-
-
     </script>
 
 </body>

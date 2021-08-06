@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from group.forms import GroupForm
 from django.utils import timezone
-from group.models import Group, Join
+from group.models import Group, Join, Join_Request
 from board.models import Board
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
@@ -55,7 +55,6 @@ def index(request):  # 그룹 검색 페이지 함수
     page_obj = paginator.get_page(page)
 
     context = {'search_list': page_obj, 'page': page, 'kw': kw, 'so': so}
-    print(search_list)
 
     return render(request, 'group/search_list.html', context)
 
@@ -157,3 +156,41 @@ def group_leave(request, group_id):
     group.members -= 1
     group.save()
     return redirect('group:group_list', pk=request.user.id)
+
+def join_request(request, group_id):
+    motivation = request.GET.get('motivation')
+
+    try:
+        selected_group = Group.objects.get(id=group_id)
+        if selected_group.members == selected_group.max_members:
+            messages.warning(request, "가입 인원이 마감되어 가입이 불가합니다.")
+            return redirect('group:group_detail', pk=group_id)
+        else:
+            group_join_request = Join_Request()
+            group_join_request.uid_id = request.user.id
+            group_join_request.gid_id = group_id
+            group_join_request.motivation = motivation
+            group_join_request.date = timezone.now()
+            group_join_request.save()
+
+            return redirect('group:group_detail', pk=group_id)
+
+    except IntegrityError as e:
+        if 'UNIQUE constraint' in e.args[0]:
+            messages.warning(request, "이미 가입한 그룹입니다.")
+            return redirect('group:group_detail', pk=group_id)
+
+    return redirect('group:search_list')
+
+class GroupJoinRequestView(generic.ListView):
+    template_name = "group/group_request.html"
+    context_object_name = 'group_request_list'
+    paginate_by = 10
+
+    def get_queryset(self):
+        group_request_list = Join_Request.objects.exclude(uid__in = Group.objects.filter(uid = self.request.user))
+
+        return group_request_list
+
+def approve_request(request):
+    pass
