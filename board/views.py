@@ -29,6 +29,7 @@ class PostListView(generic.ListView):
         context['group'] = Group.objects.get(id=self.kwargs['group_id'])
         context['board_list'] = Board.objects.filter(gid_id= self.kwargs['group_id'])
         context['bid'] = self.kwargs['pk']
+        context['so'] = self.request.GET.get('so', 'recent')
         return context
 
         # 검색위해 추가
