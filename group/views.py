@@ -167,7 +167,7 @@ def join_request(request, group_id):
 
         except IntegrityError as e:
             if 'UNIQUE constraint' in e.args[0]:
-                messages.warning(request, "승인 대기중인 그룹입니다.")
+                messages.warning(request, "가입 승인 대기중인 그룹입니다.")
                 return redirect('group:group_detail', pk=group_id)
     return redirect('group:search_list')
 

@@ -21,7 +21,6 @@ class GroupForm(forms.ModelForm):
                  'info' : '그룹 정보',
                  'goal' : '그룹 목표',
                  'max_members': '최대 인원',
-
                 }
 
 
