@@ -36,6 +36,7 @@ def index(request):  # 그룹 검색 페이지 함수
 
     page = request.GET.get('page', '1')
     kw = request.GET.get('kw', '')
+    # search_list = Group.objects.all().order_by('name')
     type = request.GET.get('type', '')
     so = request.GET.get('so', 'recent')  # 정렬기준
 

@@ -14,7 +14,7 @@
 <div class="container">
     <div class="card">
         <div class="card-body" >
-            <h5 class="card-title" > 그룹 이름 및 작성자: {{ group.name }} - {{ group.uid.username }}</h5>  <!-- 모델에 author 추가 x 확인 -->
+            <h5 class="card-title" >{{ group.name }} - {{ group.uid.username }}</h5>  <!-- 모델에 author 추가 x 확인 -->
             <p class="card-text"><small class="text-muted">{{ group.date | date:"Y-m-d h:i" }}</small></p>
             <p class="card-text" style="white-space:pre-wrap;">그룹 정보: {{ group.info }}</p>
             <p class="card-text" style="white-space:pre-wrap;">그룹 목표: {{ group.goal }}</p>
@@ -26,7 +26,7 @@
     </div>
     <form id="joinRequest" method="get" action="{% url 'group:join_request' group.id %}">
         <input type="text" name="motivation" id="motivation" style="width:50%" placeholder="그룹 지원 동기를 입력하세요">
-        <button type="submit" class="btn btn-black"> 가입 신청 </button>
+        <button type="submit" class="btn-secondary"> 가입 신청 </button>
     </form>
 </div>
 
