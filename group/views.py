@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib import messages
 
+
 # Create your views here.
 class IndexView(generic.ListView):  # 그룹 전체 리스트
     paginate_by = 10
@@ -35,21 +36,34 @@ def index(request):  # 그룹 검색 페이지 함수
 
     page = request.GET.get('page', '1')
     kw = request.GET.get('kw', '')
-    # search_list = Group.objects.all().order_by('name')
+    type = request.GET.get('type', '')
     so = request.GET.get('so', 'recent')  # 정렬기준
 
     if so == 'member':
         search_list = Group.objects.order_by('-members')
-    else:     # recent
+    else:  # recent
         search_list = Group.objects.order_by('-date')
 
     # 검색
     if kw:
-        search_list = search_list.filter(
-            Q(name__icontains=kw) |
-            Q(goal__icontains=kw) |
-            Q(info__icontains=kw)
-        ).distinct()
+        if type == 'all':
+            search_list = search_list.filter(
+                Q(name__icontains=kw) |
+                Q(goal__icontains=kw) |
+                Q(info__icontains=kw)
+            ).distinct()
+        elif type == 'name':
+            search_list = search_list.filter(
+                Q(name__icontains=kw)
+            ).distinct()
+        elif type == 'goal':
+            search_list = search_list.filter(
+                Q(goal__icontains=kw)
+            ).distinct()
+        elif type == 'info':
+            search_list = search_list.filter(
+                Q(info__icontains=kw)
+            ).distinct()
 
     paginator = Paginator(search_list, 10)
     page_obj = paginator.get_page(page)
@@ -90,7 +104,6 @@ def group_create(request):  # 그룹 생성
 
 @login_required(login_url='common:login')
 def join_group(request, pk):
-
     try:
         selected_group = Group.objects.get(id=pk)
         if selected_group.members == selected_group.max_members:
@@ -116,7 +129,6 @@ def join_group(request, pk):
 
 
 class GroupCreateView(generic.ListView):
-
     template_name = "group/group_mgr.html"
     context_object_name = 'group_create_list'
     paginate_by = 10
@@ -140,11 +152,11 @@ class GroupJoinView(generic.ListView):
 
     def get_queryset(self):
         group_join_list = Group.objects.filter(
-        id__in = Join.objects.filter(uid=self.request.user)
-        .order_by('date')
-        .values('gid')
+            id__in=Join.objects.filter(uid=self.request.user)
+                .order_by('date')
+                .values('gid')
         ).exclude(uid=self.request.user
-        )
+                  )
         return group_join_list
 
 
