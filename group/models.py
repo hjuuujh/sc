@@ -30,7 +30,7 @@ class Join(models.Model):
         unique_together = (("uid","gid"),)
 
 
-class Join_Request(models.Model):
+class JoinRequest(models.Model):
     uid = models.ForeignKey(User, on_delete=models.CASCADE)  # user 아이디
     gid = models.ForeignKey(Group, on_delete=models.CASCADE)  # 그룹
     motivation = models.CharField(max_length=100)

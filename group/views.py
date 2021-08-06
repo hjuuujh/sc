@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from group.forms import GroupForm
 from django.utils import timezone
-from group.models import Group, Join, Join_Request
+from group.models import Group, Join, JoinRequest
 from board.models import Board
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
@@ -102,32 +102,6 @@ def group_create(request):  # 그룹 생성
     return render(request, 'group/group_form.html', context)
 
 
-@login_required(login_url='common:login')
-def join_group(request, pk):
-    try:
-        selected_group = Group.objects.get(id=pk)
-        if selected_group.members == selected_group.max_members:
-            messages.warning(request, "가입 인원이 마감되어 가입이 불가합니다.")
-            return redirect('group:group_detail', pk=pk)
-        else:
-            join = Join()
-            join.uid_id = request.user.id
-            join.gid_id = pk
-            join.date = timezone.now()
-            join.save()
-
-            selected_group.members += 1
-            selected_group.save()
-            return redirect('group:group_detail', pk=pk)
-
-    except IntegrityError as e:
-        if 'UNIQUE constraint' in e.args[0]:
-            messages.warning(request, "이미 가입한 그룹입니다.")
-            return redirect('group:group_detail', pk=pk)
-
-    return redirect('group:group_list', pk=request.user.id)
-
-
 class GroupCreateView(generic.ListView):
     template_name = "group/group_mgr.html"
     context_object_name = 'group_create_list'
@@ -167,31 +141,34 @@ def group_leave(request, group_id):
     group = get_object_or_404(Group, id=group_id)
     group.members -= 1
     group.save()
-    return redirect('group:group_list', pk=request.user.id)
+    return redirect('group:group_list')
 
 def join_request(request, group_id):
     motivation = request.GET.get('motivation')
 
-    try:
-        selected_group = Group.objects.get(id=group_id)
-        if selected_group.members == selected_group.max_members:
-            messages.warning(request, "가입 인원이 마감되어 가입이 불가합니다.")
-            return redirect('group:group_detail', pk=group_id)
-        else:
-            group_join_request = Join_Request()
+    selected_group = Group.objects.get(id=group_id)
+    joined = Join.objects.filter(uid_id=request.user.id, gid_id=group_id)
+    if selected_group.members == selected_group.max_members:
+        messages.warning(request, "가입 인원이 마감되어 가입이 불가합니다.")
+        return redirect('group:group_detail', pk=group_id)
+    elif (joined):
+        messages.warning(request, "이미 가입한 그룹입니다.")
+        return redirect('group:group_detail', pk=group_id)
+    else:
+        try:
+            group_join_request = JoinRequest()
             group_join_request.uid_id = request.user.id
             group_join_request.gid_id = group_id
             group_join_request.motivation = motivation
             group_join_request.date = timezone.now()
             group_join_request.save()
 
-            return redirect('group:group_detail', pk=group_id)
+            return redirect('group:search_list')
 
-    except IntegrityError as e:
-        if 'UNIQUE constraint' in e.args[0]:
-            messages.warning(request, "이미 가입한 그룹입니다.")
-            return redirect('group:group_detail', pk=group_id)
-
+        except IntegrityError as e:
+            if 'UNIQUE constraint' in e.args[0]:
+                messages.warning(request, "승인 대기중인 그룹입니다.")
+                return redirect('group:group_detail', pk=group_id)
     return redirect('group:search_list')
 
 class GroupJoinRequestView(generic.ListView):
@@ -200,9 +177,23 @@ class GroupJoinRequestView(generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        group_request_list = Join_Request.objects.exclude(uid__in = Group.objects.filter(uid = self.request.user))
-
+        group_request_list = JoinRequest.objects.filter(gid__in = Group.objects.filter(uid = self.request.user).values('id'))
         return group_request_list
 
-def approve_request(request):
-    pass
+def approve_request(request, user_id, group_id):
+    request_approve = JoinRequest.objects.filter(uid_id=user_id, gid_id=group_id)
+    request_approve.delete()
+
+    join = Join()
+    join.uid_id = user_id
+    join.gid_id = group_id
+    join.date = timezone.now()
+    join.save()
+
+    selected_group = Group.objects.get(id=group_id)
+    selected_group.members += 1
+    selected_group.save()
+    return redirect('group:group_join_request')
+
+
+

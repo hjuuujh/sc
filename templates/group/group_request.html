@@ -23,8 +23,8 @@
             <td>{{ request.motivation }}</td>
             <td>{{ request.date }}</td>
             <td>
-            <a class = "btn btn-danger" href = "#" name = "requestApprove" role="button"
-            data-uri = "{% url 'group:group_join_request'%}">
+            <a class = "btn btn-black" href = "#" name = "requestApprove" role="button"
+            data-uri = "{% url 'group:approve_request' request.uid.id request.gid.id%}">
                 승인</a>
             </td>
         </tr>

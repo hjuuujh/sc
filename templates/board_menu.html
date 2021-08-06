@@ -22,7 +22,7 @@
                     <h5>{{group.goal}}</h5> <br>
                     <h4>현재 그룹 인원</h4>
                     <h5>{{group.members}}명</h5>
-                    <a href="{% url 'group:group_list' request.user.id %}"><h5>그룹 보기</h5></a>
+                    <a href="{% url 'group:group_list' %}"><h5>그룹 보기</h5></a>
                     <a href="{% url 'cal:calendar' group.id %}"><h5>캘린더 보기</h5></a>
 
 
