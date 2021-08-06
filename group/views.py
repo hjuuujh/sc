@@ -46,7 +46,6 @@ def index(request):  # 그룹 검색 페이지 함수
 
     # 검색
     if kw:
-        print(kw)
         if type == 'all':
             search_list = search_list.filter(
                 Q(name__icontains=kw) |

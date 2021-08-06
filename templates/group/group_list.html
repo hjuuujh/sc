@@ -14,7 +14,7 @@
         {%for group in group_list %}
         <tr>
             <td>
-                <a href="{% url 'group:group_page' group.id %}"><font color="black">{{group.name}}</font></a>
+                <a href="{% url 'group:group_page' group.id %}" style="color: black">{{group.name}}</a>
             </td>
             <td>{{ group.uid.username }}</td>
             <td>{{ group.date }}</td>
