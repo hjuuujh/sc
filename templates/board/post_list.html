@@ -10,14 +10,15 @@
                 <li><a class="menuLink" href="{% url 'board:post_list' group.id board.id %}">{{board.bname}}</a></li>
             {% endfor %}
         </ul>
-        <!-- 정렬 -->
+        <!----------------------------- 정렬 ----------------------------- -->
+     
             <span style="float: right;">
             <select class="form-control so">
                 <option value="recent" {% if so == 'recent' %}selected{% endif %}>최신순</option>
                 <option value="popular" {% if so == 'popular' %}selected{% endif %}>인기순</option>
             </select>
         </span>
-    
+         <!---------------------------------------------------------------- -->
     </nav>
 
 <div class="container my-3">
@@ -37,7 +38,7 @@
         <tr>
 <!--            <td>{{ forloop.counter }}</td>-->
             <td>
-                <a href="{% url 'board:post_detail' post.gid.id post.bid.id post.id %}">{{post.title}}</a>
+                <a id="posttitle" href="{% url 'board:post_detail' post.gid.id post.bid.id post.id %}">{{post.title}}</a>
                 {% if post.comment_set.count > 0 %}
                 <span class="text-danger small ml-2">{{ post.comment_set.count }}</span>
                 {% endif %}
@@ -131,6 +132,10 @@
 </div>
 
 <style>
+    #posttitle {
+        color : black;
+    }
+    
     #topMenu {
         height: 30px;
         width: 850px;
@@ -182,13 +187,14 @@ $(document).ready(function(){
         $("#searchForm").submit();
         }
     });
-    
     $(".so").on('change', function() {
-        $("#so").val($(this).val());
-        $("#page").val(1);
-        $("#searchForm").submit();
-    });
+            $("#so").val($(this).val());
+            $("#page").val(1);
+            $("#searchForm").submit();
+        });
 });
 </script>
+
+
 {% endblock %}
 {%endblock%}
