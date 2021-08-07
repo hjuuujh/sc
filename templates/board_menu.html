@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Study Check</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'board_menu_style.css' %}">
+
     <link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,34 +20,61 @@
         }
         h2,h4 {
             font-family: 'Do Hyeon', sans-serif;
-          
+
         }
         .group {
-            font-family: 'Sunflower', sans-serif; 
+            font-family: 'Sunflower', sans-serif;
         }
     </style>
 </head>
 <body>
-    <div class="menu">
-        <div class="group-main-text">
-                <h2>{{group.name}}</h2>
-                <ul id="accordion">
-                    <h4>그룹 정보</h4>
-                    <h5 class = "group">{{group.info}}</h5> <br>
-                    <h4>그룹 목표</h4>
-                    <h5 class = "group">{{group.goal}}</h5> <br>
-                    <h4>현재 그룹 인원</h4>
-                    <h5 class = "group">{{group.members}}명</h5>
-                    <a href="{% url 'group:group_list' %}"><h5>그룹 보기</h5></a>
-                    <a href="{% url 'cal:calendar' group.id %}"><h5>캘린더 보기</h5></a>
-
-
-                    {% if request.user == group.uid %}
-                        <a href="{% url 'board:board_list' group.id %}"><h5>게시판 관리</h5></a>
-                    {% endif %}
-
-                </ul>
-        </div>
+<div class="group-main-text">
+    <h4><a class="group-main-text">{{group.name}}</a></h4>
     </div>
+    <div class="menu">
+         <ul>
+             <li>
+                 <div>
+                <span class="icon"><ion-icon name="information-circle-outline"><</ion-icon>
+                    <span class="title">그룹 정보</span></div>
+                        <span class="info">{{group.info}}</span>
+             </li>
+             <li>
+                 <div>
+                <span class="icon"><ion-icon name="flag-outline"></ion-icon></span>
+                    <span class="title">그룹 목표</span></div>
+                        <span class="info">{{group.goal}}</span>
+             </li>
+             <li>
+                 <div>
+                <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                    <span class="title">가입 인원</span></div>
+                    <span class="info">{{group.members}}</span>
+             </li>
+         </ul>
+    </div>
+    <div class="others">
+                <ul>
+                    <li>
+                            <a href="{% url 'group:group_list' %}" class="">
+                                <span class="icon"><ion-icon name="list-circle-outline"></ion-icon></span>
+                                    <span class="others_name">그룹 보기</span>
+                    </li>
+                    <li>
+                            <a href="{% url 'cal:calendar' group.id %}" class="">
+                                <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                                    <span class="others_name">캘린더 보기</span>
+                    </li>
+                    <li>
+                        {% if request.user == group.uid %}
+                         <a href="{% url 'board:board_list' group.id %}" class="">
+                                    <span class="icon"><ion-icon name="list-outline"></ion-icon></span>
+                                        <span class="others_name">게시판 관리</span>
+                         {% endif %}
+                    </li>
+                </ul>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    background: #fff;
+
+}
+
+.menu{
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    bottom: 20px;
+    width: 300px;
+    border-radius: 10px;
+    box-sizing: initial;
+    border-left: 5px solid #242425;
+    background: #575758;
+    transition: 0.5s;
+    color: rgb(255, 255, 255)
+
+}
+
+.others {
+    bottom: 5px;
+    position: absolute;
+    display: block;
+    padding-left: 10px;
+    height: 150px;
+    line-height: 50px;
+    white-space: normal;
+    font-size: 20px;
+    margin-left:30px
+
+}
+
+.menu ul{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-left: 5px;
+}
+.menu ul li {
+    position: relative;
+    list-style: none;
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+
+.menu ul li .info{
+    position: relative;
+    display: block;
+    padding-left: 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: normal;
+    font-size: 18px;
+}
+
+.menu  ul li .icon{
+    position: relative;
+    display: inline;
+    min-width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+.menu ul li  .icon ion-icon{
+    font-size: 1.5em;
+}
+
+.others li .icon{
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.others a .icon ion-icon{
+    font-size: 1.5em;
+}
+
+
+.menu ul li span div{
+   position: relative;
+    display: block;
+    padding-left: 10px;
+    height: 60px;
+    line-height: 50px;
+    white-space: normal;
+    padding-top: 470px;
+    font-size: 20px;
+    margin-left:30px
+}
+.others a{
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.menu ul li .title{
+    position: relative;
+    display: inline;
+    padding-left: 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: normal;
+    font-size: 20px
+}
