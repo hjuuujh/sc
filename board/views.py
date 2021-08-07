@@ -21,7 +21,7 @@ class PostDetailView(generic.DetailView):
 
 
 class PostListView(generic.ListView):
-    paginate_by = 1
+    paginate_by = 10
     context_object_name = 'post_list'
 
     def get_context_data(self, **kwargs):
@@ -42,6 +42,8 @@ class PostListView(generic.ListView):
         # 정렬
 
         if so == 'popular':
+            post_list = Post.objects.filter(bid_id=self.kwargs['pk']).order_by('-post_hit','-create_date')
+        elif so == 'comment':
             post_list = Post.objects.filter(bid_id=self.kwargs['pk']).annotate(num_comment=Count('comment')).order_by('-num_comment','-create_date')
         else:  # recent
             post_list = Post.objects.filter(bid_id=self.kwargs['pk']).order_by('-create_date')

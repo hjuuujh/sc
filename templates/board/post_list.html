@@ -3,14 +3,14 @@
 {% block content %}
 
 <div class="container my-3">
-    <nav id="topMenu" style="margin-bottom:10px;margin-left:0px">
+    <nav id="topMenu">
         <ul>
             {%for board in board_list %}
                 <li><a class="menuLink" href="{% url 'board:post_list' group.id board.id %}">{{board.bname}}</a></li>
             {% endfor %}
         </ul>
     </nav>
-    <table class="table">
+    <table class="table" style="float:left; margin-top:10px;">
         <thead>
         <tr class="thead-dark">
             <th style="width:50%">제목</th>
@@ -139,6 +139,12 @@
         height: 30px;
         width: 850px;
         }
+
+    #topMenu ul {
+        margin:0;
+        padding:0;
+    }
+
     #topMenu ul li {
         list-style: none;
         color: white;
@@ -152,8 +158,8 @@
         text-decoration:none;
         color: white;
         display: block;
-        width: 150px;
-        font-size: 12px;
+        width: 160px;
+        font-size: 13px;
         font-weight: bold;
         font-family: "Trebuchet MS", Dotum, Arial;
         }
