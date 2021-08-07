@@ -12,7 +12,7 @@
     {% endfor %}
 
 <div class="container">
-    <div class="card">
+    <div class="card" style="margin-top:30px;margin-bottom:30px">
         <div class="card-body" >
             <h5 class="card-title" >{{ group.name }} - {{ group.uid.username }}</h5>  <!-- 모델에 author 추가 x 확인 -->
             <p class="card-text"><small class="text-muted">{{ group.date | date:"Y-m-d h:i" }}</small></p>
@@ -25,10 +25,26 @@
         </div>
     </div>
     <form id="joinRequest" method="get" action="{% url 'group:join_request' group.id %}">
-        <input type="text" name="motivation" id="motivation" style="width:50%" placeholder="그룹 지원 동기를 입력하세요">
-        <button type="submit" class="btn-secondary"> 가입 신청 </button>
+        <input type="text" name="motivation" id="motivation" style="width:83%;height:40px;float:left;"
+               class="form-control kw"
+               value="{{ kw|default_if_none:'' }}" placeholder="그룹 지원 동기를 입력하세요"/>
+        <button id="btn_search" type="submit" class="btn btn-black" style="width:15%;height: 40px;float:right;"> 가입 신청 </button>
     </form>
 </div>
 
 {% endblock %}
 
+{% block script %}
+<script type='text/javascript'>
+$(document).ready(function(){
+    $("#btn_search").on('click', function(e) {
+        var searchText = $(".kw").val();
+        console.log(searchText.length);
+        if(searchText == 0){
+            alert('지원 동기를 입력해주세요');
+            e.preventDefault();
+        }
+    });
+});
+</script>
+{% endblock %}
