@@ -20,6 +20,7 @@ body {
   
   .clearfix {
     margin: 15px;
+    padding-left: 10%;
   }
   
   .form {
@@ -42,9 +43,12 @@ body {
   }
   
   .calendar {
-    width: 98%;
-    margin: auto;
-    font-size: 13px;
+    width: 80%;
+    margin-top: 0%;
+    margin-left: 10%;
+    margin-right: 10%;
+
+    font-size: 6px;
   }
   
   .calendar tr, .calendar td {
@@ -52,15 +56,16 @@ body {
   }
   
   .calendar th {
-    padding: 10px;
+    padding: 5px;
     text-align: center;
-    font-size: 18px;
+    font-size: 9px;
   }
   
   .calendar td {
-    width: 200px;
-    height: 150px;
-    padding: 20px 0px 0px 5px;
+    width: 100px;
+    height: 75px;
+    padding: 15px 0px 0px 2.5px; 
+    /* 위 오른쪽 아래 왼쪽 */
   }
   
   .month {
@@ -68,12 +73,13 @@ body {
   }
   
   .date {
-    font-size: 16px;
+    font-size: 8px;
   }
   
   ul {
     height: 100%;
-    padding: 0px 5px 0px 20px;
+    padding: 0px 1px 0px 100px;
+    padding-inline-start: 0px;
   }
   
   a {
@@ -83,4 +89,8 @@ body {
   .btn-black{
     background-color: #000 !important;
     color: #fff;
+}
+
+table {
+  caption-side: bottom;
 }

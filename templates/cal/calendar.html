@@ -1,16 +1,56 @@
-{% extends 'cal/base.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
 
-{% block content %}
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <script src="{% static 'jquery-3.4.1.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'cal_style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+  <title>Study Check</title>
+</head>
+<body>
+	<div class = "sidenav">
+		{% include "group_menu.html" %}
+	</div>
+	<div class = "main">
+		{% block content %}
+		<div>
+			{{ calendar }}
+		</div>
+		<div>
+		<!-- <button type="button"  class="btn btn-outline-warning btn float-right" onClick="location.href ='{% url 'group:group_page' gid  %}' ">그룹으로</button> -->
+			<a class="btn btn-info right" style="margin-left: 15px;" href="{% url 'group:group_page' gid  %}"> 그룹으로 </a>
+		</div>
+		<p style="margin-left: 10%;">
+			<a href="{% url 'cal:calendar' gid%}?{{ prev_month }}"> Previous Month | </a>
+			<a href="{% url 'cal:calendar' gid%}?{{ next_month }}"> Next Month </a>
+		</p>
+		<p style="margin-left: 10%;">
+			<a href="{% url 'cal:event_new' gid%}" > Resister Your Schedule </a>
+		</p>
+		</div>
 
-<div class="clearfix">
-	<a class="btn btn-info left" href="{% url 'cal:calendar' gid%}?{{ prev_month }}"> Previous Month </a>
-	<a class="btn btn-info right" href="{% url 'cal:calendar' gid%}?{{ next_month }}"> Next Month </a>
-</div>
-
-{{ calendar }}
-
-<div>
-<a href="{% url 'cal:event_new' gid%}" > Resister Your Schedule </a>
-<button type="button"  class="btn btn-outline-warning btn float-right" onClick="location.href ='{% url 'group:group_page' gid  %}' ">그룹으로</button>
-</div>
-{% endblock %}
+	<style>
+	ol, ul {
+	padding-left: 1rem;
+	}
+	table {
+		caption-side: bottom;
+		border-collapse: unset;
+	}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	</div>
+	{% endblock %}
+</body>

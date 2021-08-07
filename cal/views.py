@@ -26,6 +26,11 @@ class CalendarView(generic.ListView):
         context['next_month'] = next_month(d)
         return context
 
+    def index(request):
+        title_list = Event.objects.order_by('-start_time')
+        context = {'title_list': title_list}
+        return render(request, 'cal/calendar.html', context)
+
 
 def get_date(req_month):
     if req_month:
