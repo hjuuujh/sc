@@ -20,8 +20,6 @@ class PostDetailView(generic.DetailView):
         return context
 
 
-
-
 class PostListView(generic.ListView):
     paginate_by = 5
     context_object_name = 'post_list'

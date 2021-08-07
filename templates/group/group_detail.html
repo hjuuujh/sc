@@ -39,7 +39,6 @@
 $(document).ready(function(){
     $("#btn_search").on('click', function(e) {
         var searchText = $(".kw").val();
-        console.log(searchText.length);
         if(searchText == 0){
             alert('지원 동기를 입력해주세요');
             e.preventDefault();
