@@ -1,5 +1,5 @@
 {% extends "group_base.html" %}
-
+{% load post_filter %}
 {% block content %}
 
 <!-- ------------------------------------------------------------------------->
@@ -8,9 +8,10 @@
     <table class="table">
         <thead>
         <tr class="thead-dark">
-            <th style="width:40%">그룹 이름</th>
+            <th>No.</th>
+            <th style="width:18%">그룹 이름</th>
                     <th style="width:10%">인원</th>
-                     <th>목표</th>
+                     <th style="width:40%">목표</th>
                     <th>생성 날짜</th>
         </tr>
         </thead>
@@ -18,6 +19,10 @@
         {%if search_list %}
         {%for group in search_list %}
         <tr>
+            <td>
+                <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
+                {{ search_list.paginator.count|sub:search_list.start_index|sub:forloop.counter0|add:1 }}
+            </td>
             <td>
                 <a href="{% url 'group:group_detail' group.id %}" style="color: black">{{ group.name }}</a>
             </td>
