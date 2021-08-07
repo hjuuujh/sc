@@ -84,7 +84,7 @@ def group_create(request):  # 그룹 생성
         form = GroupForm(request.POST)
         if form.is_valid():
             group = form.save(commit=False)
-            group.uid = request.user
+            group.uid_id = request.user.id
             group.members = 0
             group.date = timezone.now()
             group.save()
@@ -95,8 +95,8 @@ def group_create(request):  # 그룹 생성
             board.create_date = timezone.now()
             board.save()
 
-            join_group(request, group.id)
-            return redirect('group:group_list', pk=request.user.id)
+            approve_request(request, request.user.id,group.id)
+            return redirect('group:group_list')
     else:
         groupform = GroupForm()
         context = {'form': groupform}
@@ -116,7 +116,7 @@ class GroupCreateView(generic.ListView):
 def group_delete(request, pk):
     group = get_object_or_404(Group, id=pk)
     group.delete()
-    return redirect('group:group_list', pk=request.user.id)
+    return redirect('group:group_list')
 
 
 class GroupJoinView(generic.ListView):

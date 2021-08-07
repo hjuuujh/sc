@@ -52,10 +52,10 @@
         <thead>
         <tr class="thead-dark">
             <th>No.</th>
-            <th style="width:50%">제목</th>
+            <th style="width:40%">제목</th>
             <th>작성자</th>
             <th>작성일시</th>
-           <!-- 조회수 --> 
+            <th> 조회수 </th> <!-- 정렬에 조회수 기준이 있어서 보이는게 좋을것같아 추가했습니다. -->
         </tr>
         </thead>
         <tbody>
@@ -75,7 +75,7 @@
             </td>
             <td>{{ post.uid.username }}</td>
             <td>{{ post.create_date }}</td>
-            <!-- post.post_hit -->
+            <td>{{ post.post_hit }}</td>
         </tr>
         {% endfor %}
         {% else %}
