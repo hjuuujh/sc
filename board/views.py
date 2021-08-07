@@ -29,7 +29,7 @@ class PostListView(generic.ListView):
         context['group'] = Group.objects.get(id=self.kwargs['group_id'])
         context['board_list'] = Board.objects.filter(gid_id= self.kwargs['group_id'])
         context['bid'] = self.kwargs['pk']
-
+        context['so'] = self.request.GET.get('so', 'recent')
         return context
 
         # 검색위해 추가
@@ -63,8 +63,7 @@ class PostListView(generic.ListView):
             elif search_type == 'author':
                 post_list = post_list.filter(
                     Q(uid__username__icontains=search_keyword)
-                ).distinct()
-
+                ).distinct() 
         return post_list
 
 @login_required(login_url='common:login')
