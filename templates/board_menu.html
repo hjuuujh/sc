@@ -6,10 +6,24 @@
     <title>Study Check</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gugi&family=Nanum+Gothic+Coding:wght@400;700&family=Sunflower:wght@300&display=swap" rel="stylesheet">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <style>
+        *{
+            font-family: 'Nanum Gothic Coding', monospace
+        }
+        h2,h4 {
+            font-family: 'Do Hyeon', sans-serif;
+          
+        }
+        .group {
+            font-family: 'Sunflower', sans-serif; 
+        }
+    </style>
 </head>
 <body>
     <div class="menu">
@@ -17,11 +31,11 @@
                 <h2>{{group.name}}</h2>
                 <ul id="accordion">
                     <h4>그룹 정보</h4>
-                    <h5>{{group.info}}</h5> <br>
+                    <h5 class = "group">{{group.info}}</h5> <br>
                     <h4>그룹 목표</h4>
-                    <h5>{{group.goal}}</h5> <br>
+                    <h5 class = "group">{{group.goal}}</h5> <br>
                     <h4>현재 그룹 인원</h4>
-                    <h5>{{group.members}}명</h5>
+                    <h5 class = "group">{{group.members}}명</h5>
                     <a href="{% url 'group:group_list' %}"><h5>그룹 보기</h5></a>
                     <a href="{% url 'cal:calendar' group.id %}"><h5>캘린더 보기</h5></a>
 

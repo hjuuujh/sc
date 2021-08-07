@@ -1,5 +1,5 @@
 {% extends 'board_base.html' %}
-
+{% load post_filter %}
 {% block content %}
 <style>
     #posttitle {
@@ -51,16 +51,21 @@
     <table class="table" style="float:left; margin-top:10px;">
         <thead>
         <tr class="thead-dark">
+            <th>No.</th>
             <th style="width:50%">제목</th>
             <th>작성자</th>
             <th>작성일시</th>
-            <th>조회수</th>
+           <!-- 조회수 --> 
         </tr>
         </thead>
         <tbody>
         {%if post_list %}
         {%for post in post_list %}
         <tr>
+            <td>
+                <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
+                {{ page_obj.paginator.count|sub:page_obj.start_index|sub:forloop.counter0|add:1 }}
+            </td>
 <!--            <td>{{ forloop.counter }}</td>-->
             <td>
                 <a id="posttitle" href="{% url 'board:post_detail' post.gid.id post.bid.id post.id %}">{{post.title}}</a>
@@ -70,7 +75,7 @@
             </td>
             <td>{{ post.uid.username }}</td>
             <td>{{ post.create_date }}</td>
-            <td>{{ post.post_hit }}</td>
+            <!-- post.post_hit -->
         </tr>
         {% endfor %}
         {% else %}

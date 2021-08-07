@@ -1,12 +1,14 @@
 {% extends 'board_base.html' %} <!-- base_board/html 아니어도 되는지 확인 -->
 {% load post_filter %}
+{{ post.update_counter }}
 {% block content %}
+{{ post.update_counter }}
 <!-- detail 열때마다 조회수 증가 -->
-{{post_detail.update_counter}}
 <div class="container">
     <div class="card">
         <div class="card-body" >
             <h4 class="card-title">{{ post_detail.title }} - {{ post_detail.uid.username }}</h4>  <!-- 모델에 author 추가 x 확인 -->
+        
             <p class="card-text"><small class="text-muted">{{ post_detail.create_date | date:"Y-m-d h:i" }}</small></p>
             <p class="card-text" style="white-space:pre-wrap;">{{ post_detail.contents|mark }}</p>
         </div>
@@ -30,7 +32,7 @@
     <div class="mt-3">
     {% for comment in post.comment_set.all %}  <!-- 등록한 댓글을 출력 -->
         <div class="comment py-2 text-muted">
-            <span style="white-space: pre-line;">{{ comment.contents }}</span>
+            <span style="white-space: pre-line;">{{ comment.contents |mark}}</span>
             <span>
                 - {{ comment.uid }}, {{ comment.create_date }}
             </span>
