@@ -84,7 +84,7 @@ def group_create(request):  # 그룹 생성
         form = GroupForm(request.POST)
         if form.is_valid():
             group = form.save(commit=False)
-            group.uid = request.user
+            group.uid_id = request.user.id
             group.members = 0
             group.date = timezone.now()
             group.save()
@@ -95,8 +95,8 @@ def group_create(request):  # 그룹 생성
             board.create_date = timezone.now()
             board.save()
 
-            join_group(request, group.id)
-            return redirect('group:group_list', pk=request.user.id)
+            approve_request(request, request.user.id,group.id)
+            return redirect('group:group_list')
     else:
         groupform = GroupForm()
         context = {'form': groupform}
@@ -116,7 +116,7 @@ class GroupCreateView(generic.ListView):
 def group_delete(request, pk):
     group = get_object_or_404(Group, id=pk)
     group.delete()
-    return redirect('group:group_list', pk=request.user.id)
+    return redirect('group:group_list')
 
 
 class GroupJoinView(generic.ListView):
@@ -164,22 +164,24 @@ def join_request(request, group_id):
             group_join_request.date = timezone.now()
             group_join_request.save()
 
-            return redirect('group:search_list')
+            return redirect('group:group_join_request')
 
         except IntegrityError as e:
             if 'UNIQUE constraint' in e.args[0]:
                 messages.warning(request, "가입 승인 대기중인 그룹입니다.")
                 return redirect('group:group_detail', pk=group_id)
-    return redirect('group:search_list')
+    return redirect('group:group_join_request')
 
 class GroupJoinRequestView(generic.ListView):
+    model = JoinRequest
     template_name = "group/group_request.html"
-    context_object_name = 'group_request_list'
-    paginate_by = 10
+    paginate_by = 5
 
-    def get_queryset(self):
-        group_request_list = JoinRequest.objects.filter(gid__in = Group.objects.filter(uid = self.request.user).values('id'))
-        return group_request_list
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['group_request_list'] = JoinRequest.objects.filter(gid__in = Group.objects.filter(uid = self.request.user).values('id'))
+        context['group_apply_list'] = JoinRequest.objects.filter(uid = self.request.user)
+        return context
 
 def approve_request(request, user_id, group_id):
     request_approve = JoinRequest.objects.filter(uid_id=user_id, gid_id=group_id)

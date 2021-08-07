@@ -19,7 +19,7 @@ class Post(models.Model):
     create_date = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=200)
     contents = models.TextField(max_length=1000)
-    post_hit = models.PositiveIntegerField(default=0)
+    post_hit = models.PositiveIntegerField(default = 0)
 
     def __str__(self):
         return self.title

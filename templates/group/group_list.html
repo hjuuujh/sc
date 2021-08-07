@@ -1,10 +1,12 @@
 {% extends 'group_base.html' %}
+{% load post_filter %}
 {% block content %}
 
 <h5 class="my-3 border-bottom pb-2">그룹 보기</h5>
 <table class="table">
         <thead>
         <tr class="thead-dark">
+            <th>No.</th>
             <th style="width:50%">그룹 이름</th>
             <th>관리자</th>
             <th>생성 일시</th>
@@ -14,6 +16,10 @@
         {%if group_list %}
         {%for group in group_list %}
         <tr>
+            <td>
+                <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
+                {{ page_obj.paginator.count|sub:page_obj.start_index|sub:forloop.counter0|add:1 }}
+            </td>
             <td>
                 <a href="{% url 'group:group_page' group.id %}" style="color: black">{{group.name}}</a>
             </td>
