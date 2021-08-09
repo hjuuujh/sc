@@ -54,21 +54,27 @@
     <div class="others">
                 <ul>
                     <li>
-                            <a href="{% url 'group:group_list' %}" class="">
+                        <div>
+                        <a href="{% url 'group:group_list' %}" class="">
                                 <span class="icon"><ion-icon name="list-circle-outline"></ion-icon></span>
-                                    <span class="others_name">그룹 보기</span>
+                                    <span class="others_name">그룹 보기</span></div>
+                        </a>
                     </li>
                     <li>
+                        <div>
                             <a href="{% url 'cal:calendar' group.id %}" class="">
                                 <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
-                                    <span class="others_name">캘린더 보기</span>
+                                    <span class="others_name">캘린더 보기</span></div>
+                            </a>
                     </li>
                     <li>
+                        <div>
                         {% if request.user == group.uid %}
                          <a href="{% url 'board:board_list' group.id %}" class="">
                                     <span class="icon"><ion-icon name="list-outline"></ion-icon></span>
-                                        <span class="others_name">게시판 관리</span>
+                                        <span class="others_name">게시판 관리</span></div>
                          {% endif %}
+                         </a>
                     </li>
                 </ul>
     </div>
