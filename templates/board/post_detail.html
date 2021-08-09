@@ -14,7 +14,7 @@
         <div class="card-body" >
             <h4 id="post_title_font" class="card-title">{{ post_detail.title }} - {{ post_detail.uid.username }}</h4>  <!-- 모델에 author 추가 x 확인 -->
         
-            <p class="card-text"><small class="text-muted">{{ post_detail.create_date | date:"Y-m-d h:i" }} &nbsp; 조회수 :{{post.post_hit}}</small></p>
+            <p class="card-text"><small class="text-muted">{{ post_detail.create_date | date:"Y-m-d h:i" }} &nbsp; 조회수 :{{post.post_hit|add:1}}</small></p>
             <p class="card-text" style="white-space:pre-wrap;">{{ post_detail.contents|mark }}</p>
         </div>
     </div>
