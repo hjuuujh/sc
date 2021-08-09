@@ -15,17 +15,18 @@
   <title>Study Check</title>
 </head>
 <body>
+
 	<div class = "sidenav">
-		{% include "group_menu.html" %}
+		{% include "cal_board_menu.html" %}
 	</div>
+
 	<div class = "main">
-		{% block content %}
 		<div>
 			{{ calendar }}
 		</div>
 		<div>
 		<!-- <button type="button"  class="btn btn-outline-warning btn float-right" onClick="location.href ='{% url 'group:group_page' gid  %}' ">그룹으로</button> -->
-			<a class="btn btn-info right" style="margin-left: 15px;" href="{% url 'group:group_page' gid  %}"> 그룹으로 </a>
+			<a class="btn btn-info right" style="margin-right: 10%;" href="{% url 'group:group_page' gid  %}"> 그룹으로 </a>
 		</div>
 		<p style="margin-left: 10%;">
 			<a href="{% url 'cal:calendar' gid%}?{{ prev_month }}"> Previous Month | </a>
@@ -34,16 +35,56 @@
 		<p style="margin-left: 10%;">
 			<a href="{% url 'cal:event_new' gid%}" > Resister Your Schedule </a>
 		</p>
-		</div>
+	</div>
 
 	<style>
+	.index {
+		margin-left: 40%;
+		margin-top: 120%;
+	}
 	ol, ul {
-	padding-left: 1rem;
+		padding-left: 1rem;
 	}
 	table {
 		caption-side: bottom;
 		border-collapse: unset;
+		align-self: flex-start;
 	}
+	.calendar {
+    width: 80%;
+    margin-top: 0%;
+    margin-left: 10%;
+    margin-right: 10%;
+
+    font-size: 6px;
+  }
+  
+  .calendar tr, .calendar td {
+    border: 1px solid black;
+  }
+  
+  .calendar th {
+    padding: 5px;
+    text-align: center;
+    font-size: 9px;
+  }
+  
+  .calendar td {
+    width: 100px;
+    height: 75px;
+    padding: 15px 0px 0px 2.5px; 
+    /* 위 오른쪽 아래 왼쪽 */
+  }
+  
+  .month {
+    font-size: 25px;
+  }
+  
+  .date {
+    font-size: 8px;
+  }
+	
+	
 	</style>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 		crossorigin="anonymous"></script>
@@ -51,6 +92,5 @@
 		crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
-	</div>
-	{% endblock %}
+	
 </body>
