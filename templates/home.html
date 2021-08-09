@@ -36,9 +36,9 @@
 
     <body>
         <div class="sidenav">
-         <div class="login-main-text">       <!-- 이부분 class 이름 바꾸기-->
+         <div class="login-main-text" style="margin:0;padding:0px 20px;">       <!-- 이부분 class 이름 바꾸기-->
             <h1>Study Check &nbsp; <span style="color: rgb(150, 159, 170);"><i class="fas fa-user-edit "></i></span></h1>  <br>
-            <p><h3>코로나로 인해 비대면이 활동이 활성화 되면서 , <br> 
+            <p><h3>코로나로 인해 비대면이 활동이 활성화 되면서 <br>
                혼자 공부할 수 없는 환경에서 다른사람들과<br> 함께 내용을 공유하거나<br> 
                강제성이 필요한 사람들을 위한 곳 입니다.</h3> <br><br>
             </p>
@@ -62,18 +62,6 @@
 <!--                                                        -->
       <div class="main">
          {% include "common/login.html" %}
-         <!-- <div class="col-md-6 col-sm-12">
-            <div class="login-form"> 
-               <form>
-                  {% if user.is_authenticated %}
-                  <a class="nav-link" href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a>
-                  {% else %}
-                  <a href="{% url 'common:login' %}">로그인</a>
-                  <a href="{% url 'common:signup' %}" >회원가입</a>
-                  {% endif %}
-               </form>
-            </div>
-         </div> -->
       </div>
    
     </body>

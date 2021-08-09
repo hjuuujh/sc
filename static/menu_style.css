@@ -11,11 +11,10 @@ body{
     background: #fff;
 }
 .menu{
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    bottom: 20px;
+    position: relative;
+    margin:auto;
     width: 300px;
+    height: 400px;
     border-radius: 10px;
     box-sizing: initial;
     border-left: 5px solid #242425;
@@ -23,12 +22,14 @@ body{
     transition: 0.5s;
 }
 .menu ul{
+    margin:0;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     padding-left: 5px;
-    padding-top: 40px;
+    padding-top: 20px;
+
 }
 .menu ul li{
     position: relative;

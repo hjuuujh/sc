@@ -23,9 +23,12 @@
             <td>{{ request.motivation }}</td>
             <td>{{ request.date }}</td>
             <td>
-            <a class = "btn btn-black" href = "#" name = "requestApprove" role="button"
-            data-uri = "{% url 'group:approve_request' request.uid.id request.gid.id%}">
+                <a class = "btn btn-black" href = "#" name = "requestApprove" role="button"
+            data-uri = "{% url 'group:approve_request' request.uid.id request.gid.id 1%}">
                 승인</a>
+                <a class = "btn btn-black" href = "#" name = "requestReject" role="button"
+            data-uri = "{% url 'group:approve_request' request.uid.id request.gid.id 0%}">
+                거부</a>
             </td>
         </tr>
         {% endfor %}
@@ -160,6 +163,11 @@ $("a[name=requestApprove]").on("click",function(e){
     if(confirm("승인하시겠습니까?")) {
                 location.href = $(this).data('uri');
             }
-})
+});
+$("a[name=requestReject]").on("click",function(e){
+    if(confirm("거부하시겠습니까?")) {
+                location.href = $(this).data('uri');
+            }
+});
 </script>
 {% endblock %}

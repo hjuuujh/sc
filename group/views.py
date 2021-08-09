@@ -95,7 +95,7 @@ def group_create(request):  # 그룹 생성
             board.create_date = timezone.now()
             board.save()
 
-            approve_request(request, request.user.id,group.id)
+            approve_request(request, request.user.id,group.id,1)
             return redirect('group:group_list')
     else:
         groupform = GroupForm()
@@ -183,19 +183,21 @@ class GroupJoinRequestView(generic.ListView):
         context['group_apply_list'] = JoinRequest.objects.filter(uid = self.request.user)
         return context
 
-def approve_request(request, user_id, group_id):
+def approve_request(request, user_id, group_id, approve):
     request_approve = JoinRequest.objects.filter(uid_id=user_id, gid_id=group_id)
     request_approve.delete()
 
-    join = Join()
-    join.uid_id = user_id
-    join.gid_id = group_id
-    join.date = timezone.now()
-    join.save()
+    if(approve):
+        join = Join()
+        join.uid_id = user_id
+        join.gid_id = group_id
+        join.date = timezone.now()
+        join.save()
 
-    selected_group = Group.objects.get(id=group_id)
-    selected_group.members += 1
-    selected_group.save()
+        selected_group = Group.objects.get(id=group_id)
+        selected_group.members += 1
+        selected_group.save()
+
     return redirect('group:group_join_request')
 
 

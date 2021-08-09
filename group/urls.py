@@ -33,5 +33,5 @@ urlpatterns = [
     path('leave/<int:group_id>', views.group_leave, name='group_leave'),
     path('request/<int:group_id>', views.join_request, name='join_request'),
     path('join/request/', views.GroupJoinRequestView.as_view(), name='group_join_request'),
-    path('approve/<int:user_id>/<int:group_id>', views.approve_request, name='approve_request'),
+    path('approve/<int:user_id>/<int:group_id>/<int:approve>', views.approve_request, name='approve_request'),
 ]
