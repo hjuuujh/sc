@@ -6,26 +6,24 @@
     <title>Study Check</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="{% static 'board_menu_style.css' %}">
-
-    <link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!--    <link rel="preconnect" href="https://fonts.googleapis.com">-->
+<!--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->   <!-- 글씨체는 추후 전체 적용 필요-->
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gugi&family=Nanum+Gothic+Coding:wght@400;700&family=Sunflower:wght@300&display=swap" rel="stylesheet">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <style>
-        *{
-            font-family: 'Nanum Gothic Coding', monospace
-        }
-        h2,h4 {
-            font-family: 'Do Hyeon', sans-serif;
+<!--    <style>-->
+<!--        *{-->
+<!--            font-family: 'Nanum Gothic Coding', monospace-->
+<!--        }-->
+<!--        h2,h4 {-->
+<!--            font-family: 'Do Hyeon', sans-serif;-->
 
-        }
-        .group {
-            font-family: 'Sunflower', sans-serif;
-        }
-    </style>
+<!--        }-->
+<!--        .group {-->
+<!--            font-family: 'Sunflower', sans-serif;-->
+<!--        }-->
+<!--    </style>-->
 </head>
 <body>
 <div class="group-main-text">
@@ -35,7 +33,7 @@
          <ul>
              <li>
                  <div>
-                <span class="icon"><ion-icon name="information-circle-outline"><</ion-icon>
+                <span class="icon"><ion-icon name="information-circle-outline"></ion-icon></span>
                     <span class="title">그룹 정보</span></div>
                         <span class="info">{{group.info}}</span>
              </li>
