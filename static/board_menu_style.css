@@ -28,43 +28,22 @@ body{
 
 }
 
-.others {
-    bottom: 5px;
-    position: absolute;
-    display: block;
-    padding-left: 10px;
-    height: 150px;
-    line-height: 50px;
-    white-space: normal;
-    font-size: 20px;
-    margin-left:30px
-
-}
 
 .menu ul{
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    padding-left: 5px;
+    padding-left: 10px;
+    padding-top : 10px;
 }
+
 .menu ul li {
     position: relative;
     list-style: none;
     width: 100%;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-}
-
-
-.menu ul li .info{
-    position: relative;
-    display: block;
-    padding-left: 10px;
-    height: 60px;
-    line-height: 60px;
-    white-space: normal;
-    font-size: 18px;
 }
 
 .menu  ul li .icon{
@@ -79,38 +58,75 @@ body{
     font-size: 1.5em;
 }
 
-.others li .icon{
+.others ul li .icon{
     position: relative;
     display: block;
     min-width: 60px;
     height: 60px;
     line-height: 60px;
     text-align: center;
+    color: rgb(255, 255, 255);
+    margin-top: 5px;
 }
 
-.others a .icon ion-icon{
-    font-size: 1.5em;
-}
-
-
-.menu ul li span div{
-   position: relative;
+.others ul li .others_name{
+    position: relative;
     display: block;
     padding-left: 10px;
     height: 60px;
-    line-height: 50px;
+    width: 240px;
+    line-height: 60px;
     white-space: normal;
-    padding-top: 470px;
-    font-size: 20px;
-    margin-left:30px
+    font-size: 15px
 }
-.others a{
+
+.others  ul ion-icon{
+    font-size: 1.5em;
+}
+
+.menu ul li .info{
+    position: relative;
+    display: block;
+    margin-top: 5px;
+    padding-left: 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: normal;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+
+}
+
+.others ul li a{
     position: relative;
     display: block;
     width: 100%;
     display: flex;
     text-decoration: none;
     color: rgb(255, 255, 255);
+}
+
+.others ul{
+    bottom: 30px;
+    position: absolute;
+    display: inline;
+    padding-left: 10px;
+    height: 150px;
+    line-height: 50px;
+    white-space: normal;
+    font-size: 20px;
+    margin-left:30px
+    color: rgb(255, 255, 255);
+    list-style-type:none;
+}
+
+.others {
+    position: fixed;
+    bottom: 30px;
+    left: 20px;
+    width: 300px;
+    height: 200px;
+
 }
 
 .menu ul li .title{
@@ -120,5 +136,14 @@ body{
     height: 60px;
     line-height: 60px;
     white-space: normal;
-    font-size: 20px
+    font-size: 18px
 }
+
+@media screen and (max-width: 768px){
+    .menu { display: none;}
+}
+
+@media screen and (max-height: 768px){
+    .others  { display: none;}
+}
+
