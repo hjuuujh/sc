@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
-*
-{
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -10,67 +9,147 @@ body{
     min-height: 100vh;
     background: #fff;
 }
-.menu{
-    position: relative;
-    margin:auto;
-    width: 300px;
-    height: 400px;
-    border-radius: 10px;
-    box-sizing: initial;
-    border-left: 5px solid #242425;
-    background: #575758;
-    transition: 0.5s;
-}
-.menu ul{
-    margin:0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding-left: 5px;
-    padding-top: 20px;
+/* 가로 넓을때 (이 사이즈보다 넓은 경우 적용)*/
+@media screen and (min-width: 768px){
 
-}
-.menu ul li{
-    position: relative;
-    list-style: none;
-    width: 100%;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-}
-.active{
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    background: rgb(0, 0, 0);
+    .menu{
+        position: relative;
+        margin:auto;
+        top:10%;
+        width: 300px;
+        height: 400px;
+        border-radius: 10px;
+        box-sizing: initial;
+        border-left: 5px solid #242425;
+        background: #575758;
+        transition: 0.5s;
+    }
+
+    .menu ul{
+        margin:0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-left: 5px;
+        padding-top: 20px;
+
+    }
+
+    .menu ul li{
+        position: relative;
+        list-style: none;
+        width: 100%;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+    .active{
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background: rgb(0, 0, 0);
+    }
+
+    .menu ul li a{
+        position: relative;
+        display: block;
+        width: 100%;
+        display: flex;
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+    }
+
+    .menu ul li a .icon{
+        position: relative;
+        display: block;
+        min-width: 60px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+    }
+
+    .menu ul li a .icon ion-icon{
+        font-size: 1.5em;
+    }
+
+    .menu ul li a .title{
+        position: relative;
+        display: block;
+        padding-left: 10px;
+        height: 60px;
+        line-height: 60px;
+        white-space: normal;
+    }
 }
 
-.menu ul li a{
-    position: relative;
-    display: block;
-    width: 100%;
-    display: flex;
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-}
-.menu ul li.active a{
-    color: rgb(248, 247, 247);
-}
-.menu ul li a .icon{
-    position: relative;
-    display: block;
-    min-width: 60px;
-    height: 60px;
-    line-height: 60px;
-    text-align: center;
-}
-.menu ul li a .icon ion-icon{
-    font-size: 1.5em;
-}
-.menu ul li a .title{
-    position: relative;
-    display: block;
-    padding-left: 10px;
-    height: 60px;
-    line-height: 60px;
-    white-space: normal;
+/* 가로 좁을때 (이 사이즈보다 작은 경우 적용)*/
+@media screen and (max-width: 768px){
+    .menu{
+        position: relative;
+        margin:auto;
+        top:10%;
+        width: 300px;
+        height: 400px;
+        border-radius: 10px;
+        box-sizing: initial;
+        border-left: 5px solid #242425;
+        background: #575758;
+        transition: 0.5s;
+    }
+
+    .menu ul{
+        margin:0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-left: 5px;
+        padding-top: 20px;
+
+    }
+
+    .menu ul li{
+        position: relative;
+        list-style: none;
+        width: 100%;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+    .active{
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background: rgb(0, 0, 0);
+    }
+
+    .menu ul li a{
+        position: relative;
+        display: block;
+        width: 100%;
+        display: flex;
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+    }
+
+    .menu ul li a .icon{
+        position: relative;
+        display: block;
+        min-width: 60px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+    }
+
+    .menu ul li a .icon ion-icon{
+        font-size: 1.5em;
+    }
+
+    .menu ul li a .title{
+        position: relative;
+        display: block;
+        padding-left: 10px;
+        height: 60px;
+        line-height: 60px;
+        white-space: normal;
+    }
 }
