@@ -3,31 +3,37 @@ body {
     font-family: "Lato", sans-serif;
 }
 
-
-
-.main-head{
-    height: 150px;
-    background: #FFF;
-
-}
-
-.sidenav {
-    height: 100%;
-    background-color: #000;
-    overflow-x: hidden;
-    padding-top: 20px;
-}
-
-
-.main {
-    padding: 0px 10px;
-}
-
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
 }
 
-@media screen and (max-width: 450px) {
+/* 가로 넓을때 (이 사이즈보다 넓은 경우 적용)*/
+@media screen and (min-width: 768px){
+    .main-head{
+            height: 150px;
+            background: #FFF;
+    }
+
+    .sidenav {
+        height: 100%;
+        background-color: #000;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+    .list{
+    padding: 0px 10px;
+    margin-left:30%;
+    }
+
+    .sidenav{
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
     .login-form{
         margin-top: 10%;
     }
@@ -37,10 +43,11 @@ body {
     }
 }
 
-@media screen and (min-width: 768px){
-    .main{
-        margin-left: 40%;
-    }
+/* 가로 좁을때 (이 사이즈보다 작은 경우 적용)*/
+@media screen and (max-width: 768px){
+    .list {
+        width: 100%;
+     }
 
     .sidenav{
         width: 40%;
