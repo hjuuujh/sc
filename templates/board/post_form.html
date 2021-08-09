@@ -5,7 +5,7 @@
 
     <h3 class="my-3 border-bottom pb-2">게시글 작성</h3>
 
-    <form method="post">
+    <form method="post" >
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">저장하기</button>

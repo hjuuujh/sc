@@ -9,15 +9,24 @@ from django.contrib.auth.models import User
 from django.db.models import Count, Q
 from django.contrib import messages
 
+
 class PostDetailView(generic.DetailView):
     model = Post
+    count_hit = True
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['post_detail'] = Post.objects.get(id=self.kwargs['pk'])
         context['group'] = Group.objects.get(id = self.kwargs['group_id'])
-       
+        post = Post.objects.get(id=self.kwargs['pk'])
+        post.post_hit += 1
+        post.save()
+
+
         return context
+ 
+
+   
 
 
 class PostListView(generic.ListView):
@@ -38,6 +47,7 @@ class PostListView(generic.ListView):
         search_keyword = self.request.GET.get('kw', '')
         search_type = self.request.GET.get('type', '')
         so = self.request.GET.get('so', 'recent')  # 정렬기준
+        
 
         # 정렬
 

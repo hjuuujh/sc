@@ -15,6 +15,8 @@ class PostForm(forms.ModelForm):
             'contents': '내용',
         }
 
+
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment

@@ -1,8 +1,12 @@
 {% extends 'board_base.html' %} <!-- base_board/html 아니어도 되는지 확인 -->
 {% load post_filter %}
 {{ post.update_counter }}
+
 {% block content %}
+
+
 <!-- post.update_counter -->
+
 
 <!-- detail 열때마다 조회수 증가 -->
 <div class="container">
@@ -10,7 +14,7 @@
         <div class="card-body" >
             <h4 id="post_title_font" class="card-title">{{ post_detail.title }} - {{ post_detail.uid.username }}</h4>  <!-- 모델에 author 추가 x 확인 -->
         
-            <p class="card-text"><small class="text-muted">{{ post_detail.create_date | date:"Y-m-d h:i" }}</small></p>
+            <p class="card-text"><small class="text-muted">{{ post_detail.create_date | date:"Y-m-d h:i" }} &nbsp; 조회수 :{{post.post_hit}}</small></p>
             <p class="card-text" style="white-space:pre-wrap;">{{ post_detail.contents|mark }}</p>
         </div>
     </div>
@@ -60,8 +64,8 @@
     <div class="form-group">
         <textarea name="contents" id="contents" rows="15" class="form-control" ></textarea>
     </div>
-    <input type="submit" value="댓글등록" class="btn btn-success" >
-    <button type="button"  class="btn btn-outline-warning btn float-right" onClick="location.href ='{% url 'board:post_list' post.gid.id post.bid.id  %}' ">목록으로</button>
+    <input type="submit" value="댓글등록" class="btn btn-outline-success" >
+    <button type="button"  class="btn btn-outline-warning btn float-right" onClick="location.href ='{% url 'board:post_list' post.gid.id post.bid.id  %}' "> <span class="icon"><ion-icon name="list-outline"></ion-icon></span>목록으로</button>
     </form>
 </div>
 
