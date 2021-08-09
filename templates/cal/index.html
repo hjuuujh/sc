@@ -1,0 +1,29 @@
+{% extends 'calendar.html' %}
+{% block content %}
+<div class="container my-3">
+    <table class="table">
+        <thead>
+        <tr class="text-center thead-dark">
+            <th>schedule title</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if title_list %}
+        {% for title in title_list %}
+        <tr class="text-center">
+            <td class="text-left">
+                {{ event.title }}
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">일정이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <style>
+        .table{border-collapse:collapse}
+    </style>
+</div>

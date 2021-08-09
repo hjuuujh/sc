@@ -20,6 +20,7 @@ class CalendarView(generic.ListView):
         d = get_date(self.request.GET.get('month', None))
         cal = Calendar(d.year, d.month)
         html_cal = cal.formatmonth(pk=self.kwargs['pk'],withyear=True)
+        context['group'] = Group.objects.get(id = self.kwargs['pk'])
         context['gid'] = self.kwargs['pk']
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = prev_month(d)
