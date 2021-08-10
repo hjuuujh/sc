@@ -7,22 +7,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="{% static 'jquery-3.4.1.min.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'topMenu.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
     <script src="{% static 'bootstrap.min.js' %}"></script>
 </head>
 
 <body>
     <!-- <div class = "container"> -->
-        <div class = "sidenav" style="width:30%;">
+        <div class = "sidenav">
             {% include "board_menu.html" %}
         </div>
-        <div class = "main" style="margin-left:30%;">
+        <div class = "list">
             {% block content %}
             {%endblock%}
             {% block script %}
             {% endblock %}
         </div>
 
-    <!-- </div> -->
-</body>
+    </body>
+<script>
+    $(function () {
+        var trigger = $('.trigger');
+        var menu = $('.menulist');
+        $(trigger).on('click', function (e) {
+            e.preventDefault();
+            menu.slideToggle();
+        });
+        $(window).resize(function () {
+            var w = $(window).width();
+            if (w > 768 && menu.is(':hidden')) {
+                menu.removeAttr('style');
+            }
+        });
+    });
+</script>
 </html>

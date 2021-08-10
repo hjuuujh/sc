@@ -1,7 +1,7 @@
 {% extends 'board_base.html' %}  <!-- base/html 맞는지 확인 -->
 
 {% block content %}
-<div class="container my-3">
+<div class="container-list">
     <form method="post" class="post-form">
         {% csrf_token %}
         {% include "form_errors.html" %}
@@ -10,7 +10,7 @@
             <textarea class="form-control" name="contents" id="contents"
                       rows="10">{{ form.contents.value|default_if_none:'' }}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary">저장하기</button>
+        <button type="submit" class="btn btn-black">저장하기</button>
     </form>
 </div>
 {% endblock %}

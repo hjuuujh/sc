@@ -17,6 +17,7 @@
     <div class="group-main-text" style="position:relative;top:10%;">
         <h4><a class="group-main-text" href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a></h4>
     </div>
+
     <nav class="menu">
         <a href="#" class="trigger">MENU</a>
         <ul class="menulist">
@@ -56,8 +57,12 @@
                 <span class="title">그룹 승인</span>
                 </a>
             </li>
+            <li class="logout">
+                <a  href="{% url 'common:logout' %}">Log Out</a>
+            </li>
         </ul>
     </nav>
+
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
@@ -73,7 +78,6 @@
             }
         });
     });
-
     </script>
 
 </body>

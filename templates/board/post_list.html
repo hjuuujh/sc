@@ -1,46 +1,9 @@
 {% extends 'board_base.html' %}
 {% load post_filter %}
+
 {% block content %}
-<style>
-    #posttitle {
-        color : black;
-    }
 
-    #topMenu {
-        height: 30px;
-        width: 850px;
-        }
-
-    #topMenu ul {
-        margin:0;
-        padding:0;
-    }
-
-    #topMenu ul li {
-        list-style: none;
-        color: white;
-        background-color: #2d2d2d;
-        float: left;
-        line-height: 30px;
-        vertical-align: middle;
-        text-align: center;
-         }
-    #topMenu .menuLink {
-        text-decoration:none;
-        color: white;
-        display: block;
-        width: 160px;
-        font-size: 13px;
-        font-weight: bold;
-        font-family: "Trebuchet MS", Dotum, Arial;
-        }
-    #topMenu .menuLink:hover {
-        background-color: #4d4d4d;
-        }
-
-</style>
-
-<div class="container my-3">
+<div class="container-list">
     <nav id="topMenu">
         <ul>
             {%for board in board_list %}

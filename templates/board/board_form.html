@@ -2,8 +2,8 @@
 {% extends 'board_base.html' %}
 
 {% block content %}
-
-    <h3 class="my-3 border-bottom pb-2">게시판 생성</h3>
+<div class="container-list">
+    <h5 class="my-3 border-bottom pb-2">게시판 생성</h5>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}

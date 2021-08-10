@@ -9,19 +9,24 @@ from django.contrib.auth.models import User
 from django.db.models import Count, Q
 from django.contrib import messages
 
+
 class PostDetailView(generic.DetailView):
     model = Post
+    count_hit = True
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['post_detail'] = Post.objects.get(id=self.kwargs['pk'])
         context['group'] = Group.objects.get(id = self.kwargs['group_id'])
+        post = Post.objects.get(id=self.kwargs['pk'])
+        post.post_hit += 1
+        post.save()
 
         return context
 
 
 class PostListView(generic.ListView):
-    paginate_by = 5
+    paginate_by = 8
     context_object_name = 'post_list'
 
     def get_context_data(self, **kwargs):
@@ -38,6 +43,7 @@ class PostListView(generic.ListView):
         search_keyword = self.request.GET.get('kw', '')
         search_type = self.request.GET.get('type', '')
         so = self.request.GET.get('so', 'recent')  # 정렬기준
+        
 
         # 정렬
 
@@ -171,7 +177,7 @@ def comment_modify(request, comment_id):
 
 def comment_delete(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
-    print(request.user)
+
     if request.user != comment.uid:
         messages.error(request, '삭제권한이 없습니다')
     else:
@@ -211,9 +217,9 @@ def board_delete(request, group_id, pk):
     board.delete()
     return redirect('board:board_list', pk = group_id)
 
-
-def to_post_list(request,group_id):
-    board = Board.objects.filter(gid=group_id).first()
-    return redirect('board:post_list', group_id=group_id, pk=board.id)
-
+#
+# def to_post_list(request,group_id):
+#     board = Board.objects.filter(gid=group_id).first()
+#     return redirect('board:post_list', group_id=group_id, pk=board.id)
+#
 

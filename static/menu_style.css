@@ -33,7 +33,6 @@ body{
         width: 100%;
         padding-left: 5px;
         padding-top: 20px;
-
     }
 
     .menu ul li{
@@ -84,6 +83,10 @@ body{
     .menu a.trigger{
         display:none;
     }
+
+    .logout{
+        display:none;
+    }
 }
 
 /* 가로 좁을때 (이 사이즈보다 작은 경우 적용)*/
@@ -99,34 +102,60 @@ body{
 
     .menu{
         border-bottom: 0;
-        margin:auto;
+        margin:0;
+        line-height:40px;
     }
-    /*메뉴 전체 검정 a태그 네모 회색 글씨 흰색*/
+
+    .menu trigger a{
+         text-decoration:none;
+    }
+
+    .trigger a:visited{
+         color:#fff;
+    }
+
     .menu ul{
         display: none;
 	    height:auto;
         margin:0;
         padding:0;
-        top: 0;
-        left: 0;
         text-align:center;
     }
 
     .menu ul li{
         display: block;
 		float: none;
+		height:40px;
 		border-bottom: 1px solid #576979;
-
+        background-color: #000;
+        line-height:40px;
     }
 
     .menu ul li a{
-     /*글씨색 검정으로*/
+        text-decoration:none
+    }
+
+    .menu ul li a:visited{
+         color:#fff;
+    }
+
+    .menu ul li a:hover{
+        color:grey;
     }
 
     .menu a.trigger {
+        border-bottom: 1px solid #576979;
 		display: block;
-		background-color: #283744;
+		height:40px;
+		background-color: #000;
 		width: 100%;
 		position: relative;
 	}
+
+	.logout a:visited{
+         color:#fff;
+    }
+    .logout a:hover{
+        color:grey;
+    }
 }

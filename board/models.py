@@ -3,6 +3,7 @@ from group.models import Group
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+
 class Board(models.Model):
     bname = models.CharField(max_length=100)
     gid = models.ForeignKey(Group,on_delete=models.CASCADE)
@@ -20,6 +21,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     contents = models.TextField(max_length=1000)
     post_hit = models.PositiveIntegerField(default = 0)
+    
 
     def __str__(self):
         return self.title
@@ -29,9 +31,9 @@ class Post(models.Model):
     
     @property
     def update_counter(self):
-        self.post_hit = self.post_hit + 1
+        self.post_hit += 1 
         self.save()
-
+    
 
 
 class Comment(models.Model):

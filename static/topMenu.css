@@ -1,0 +1,36 @@
+    #posttitle {
+        color : black;
+    }
+
+    #topMenu {
+        height: 30px;
+        }
+
+    #topMenu ul {
+        margin:0;
+        padding:0;
+    }
+
+    #topMenu ul li {
+        list-style: none;
+        color: white;
+        background-color: #2d2d2d;
+        float: left;
+        line-height: 30px;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    #topMenu .menuLink {
+        text-decoration:none;
+        color: white;
+        display: block;
+        width: 160px;
+        font-size: 13px;
+        font-weight: bold;
+        font-family: "Trebuchet MS", Dotum, Arial;
+        }
+
+    #topMenu .menuLink:hover {
+        background-color: #4d4d4d;
+        }
