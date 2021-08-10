@@ -16,7 +16,7 @@ class PostDetailView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         context['post_detail'] = Post.objects.get(id=self.kwargs['pk'])
         context['group'] = Group.objects.get(id = self.kwargs['group_id'])
-       
+
         return context
 
 

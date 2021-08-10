@@ -32,7 +32,6 @@ body {
     margin-left:30%;
     }
 
-
     .login-form{
         margin-top: 10%;
     }
@@ -40,6 +39,7 @@ body {
     .register-form{
         margin-top: 10%;
     }
+
 }
 
 /* 가로 좁을때 (이 사이즈보다 작은 경우 적용)*/
@@ -47,14 +47,6 @@ body {
     .list {
         width: 100%;
      }
-
-    .sidenav{
-        width: 100%;
-        height: 10%;
-        position: relative;
-        background-color: #000;
-        overflow-x: hidden;
-    }
 
     .login-form{
         margin-top: 80%;
