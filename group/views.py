@@ -130,8 +130,7 @@ class GroupJoinView(generic.ListView):
             id__in=Join.objects.filter(uid=self.request.user)
                 .order_by('date')
                 .values('gid')
-        ).exclude(uid=self.request.user
-                  )
+        ).exclude(uid=self.request.user)
         return group_join_list
 
 

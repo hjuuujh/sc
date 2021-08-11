@@ -46,6 +46,16 @@ body{
         color:#fff;
     }
 
+    .active{
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background: rgb(0, 0, 0);
+    }
+
+    .menuLink active{
+        background: rgb(0, 0, 0) !important;
+    }
+
     .menu ul li a{
         position: relative;
         display: block;
@@ -78,10 +88,6 @@ body{
     }
 
     .menu a.trigger{
-        display:none;
-    }
-
-    .logout{
         display:none;
     }
 
@@ -140,7 +146,7 @@ body{
     }
 
     .menu ul li a{
-        text-decoration:none
+        text-decoration:none;
     }
 
     .menu ul li a:visited{
@@ -158,5 +164,7 @@ body{
 		background-color: #000;
 		width: 100%;
 		position: relative;
+		text-decoration:none;
+		color:#fff;
 	}
 }

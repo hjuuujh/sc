@@ -32,7 +32,7 @@
         {% endif %}
         </tbody>
     </table>
-    <a href="{% url 'board:board_create' group.id %}" class="btn btn-primary">게시판 생성 </a>
+    <a href="{% url 'board:board_create' group.id %}" class="btn btn-black">게시판 생성 </a>
     <button type="button"  class="btn btn-outline-warning btn float-right" onClick="location.href ='{% url 'board:post_list' group.id bid  %}' ">목록으로</button>
 
 
