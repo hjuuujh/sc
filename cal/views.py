@@ -65,7 +65,7 @@ def event_new(request, pk):
         cal.save()
         url = reverse('cal:calendar', kwargs={'pk': pk})
         return HttpResponseRedirect(url)
-    context = {'form': form, 'pk': pk}
+    context = {'form': form, 'pk':pk, 'group': Group.objects.get(id=pk)}
     return render(request, 'cal/event.html', context)
 
 def event_edit(request, event_id=None):
