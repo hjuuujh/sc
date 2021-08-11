@@ -37,10 +37,11 @@ class Post(models.Model):
         self.post_hit += 1 
         self.save()
     
-    # def delete(self, args, **kargs):
-    #         if self.file:
-    #             os.remove(os.path.join(settings.MEDIA_ROOT, self.file.path))
-    #         super(Post, self).delete(args, **kargs)    
+    # 게시글 삭제 시 media 디렉토리에 있는 사진도 같이 삭제
+    def delete(self, *args, **kargs):
+        if self.file:
+            os.remove(os.path.join(settings.MEDIA_ROOT, self.file.path))
+        super(Post, self).delete(*args, **kargs)
 
 
 class Comment(models.Model):
