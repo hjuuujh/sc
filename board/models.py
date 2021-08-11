@@ -23,7 +23,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     contents = models.TextField(max_length=1000)
     post_hit = models.PositiveIntegerField(default = 0)
-    file = models.ImageField(null=True , upload_to="", blank=True)
+    file = models.ImageField(null=True , upload_to="", blank=True)   # 이미지파일 
     
 
     def __str__(self):
