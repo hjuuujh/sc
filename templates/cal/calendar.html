@@ -1,46 +1,18 @@
-{% load static %}
-<!doctype html>
-<html lang="en">
+{% extends 'cal_base.html' %}
+{% block content %}
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Bootstrap CSS -->
-  <script src="{% static 'jquery-3.4.1.min.js' %}"></script>
-	<link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'cal_style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
-    <script src="{% static 'bootstrap.min.js' %}"></script>
-  <title>Study Check</title>
-</head>
-<body>
+<div class = "main">
+	<div class="topMenu">
+	<a href="{% url 'cal:calendar' gid%}?{{ prev_month }}" role="button" class="btn btn-black left"> Previous Month</a>
+	<a href="{% url 'cal:calendar' gid%}?{{ next_month }}" role="button" class="btn btn-black right"> Next Month </a>
+	<a href="{% url 'cal:event_new' gid%}" role="button" class="btn btn-black center" id="register"> Resister Your Schedule </a>
+	<a class="btn btn-black center" href="{% url 'group:group_page' gid  %}"> 그룹으로 </a>
 
-	<div class = "sidenav">
-		{% include "cal_menu.html" %}
+</div>
+
+	<div>
+		{{ calendar }}
 	</div>
 
-	<div class = "main">
-		<div class="topMenu">
-		<a href="{% url 'cal:calendar' gid%}?{{ prev_month }}" role="button" class="btn btn-black left"> Previous Month</a>
-		<a href="{% url 'cal:calendar' gid%}?{{ next_month }}" role="button" class="btn btn-black right"> Next Month </a>
-		<a href="{% url 'cal:event_new' gid%}" role="button" class="btn btn-black center" style="margin-left:15%"> Resister Your Schedule </a>
-		<a class="btn btn-black center" href="{% url 'group:group_page' gid  %}"> 그룹으로 </a>
-
-	</div>
-
-		<div>
-			{{ calendar }}
-		</div>
-		<div>
-		</div>
-	</div>
-
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
-
-</body>
+</div>
+{% endblock %}

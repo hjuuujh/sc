@@ -86,5 +86,5 @@ def event_edit(request, event_id=None):
     else:
         form = EventForm(instance=instance)
         pk = instance.gid.id
-        context = {'form': form, 'pk':pk}
+        context = {'form': form, 'pk':pk, 'group': Group.objects.get(id=pk)}
     return render(request, 'cal/event.html', context)
