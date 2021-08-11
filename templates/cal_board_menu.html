@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="{% static 'board_menu_style.css' %}">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}">
+<!--    <link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}">-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gugi&family=Nanum+Gothic+Coding:wght@400;700&family=Sunflower:wght@300&display=swap" rel="stylesheet">
@@ -28,63 +28,55 @@
     </style>
 </head>
 <body>
-<div class="group-main-text">
-    <h4><a class="group-main-text">{{group.name}}</a></h4>
+<div class="group-main-text" style="position:relative;top:10%;">
+        <h4><a class="group-main-text">{{group.name}}</a></h4>
     </div>
+
     <div class="menu">
-         <ul>
-             <li>
-                 <div>
-                <span class="icon"><ion-icon name="information-circle-outline"><</ion-icon>
-                    <span class="title">그룹 정보</span></div>
-                        <span class="info">{{group.info}}</span>
+        <a href="#" class="trigger">MENU</a>
+         <ul class="menulist">
+             <li class="info">
+                <span class="icon"><ion-icon name="information-circle-outline"></ion-icon></span>
+                <span class="title">그룹 정보 : </span>
+                <span>{{group.info}}</span>
              </li>
-             <li>
-                 <div>
+             <li class="info">
                 <span class="icon"><ion-icon name="flag-outline"></ion-icon></span>
-                    <span class="title">그룹 목표</span></div>
-                        <span class="info">{{group.goal}}</span>
+                <span class="title">그룹 목표 : </span>
+                <span>{{group.goal}}</span>
+             </li>
+             <li class="info">
+                <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                <span class="title">가입 인원 : </span>
+                <span>{{group.members}}</span>
              </li>
              <li>
-                 <div>
-                <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
-                    <span class="title">가입 인원</span></div>
-                    <span class="info">{{group.members}}</span>
-             </li>
+                <a href="{% url 'group:group_list' %}" class="">
+                <span class="icon"><ion-icon name="list-circle-outline"></ion-icon></span>
+                <span class="title">그룹 보기</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'cal:calendar' group.id %}" class="">
+                <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                <span class="title">캘린더 보기</span>
+                </a>
+            </li>
+            <li>
+                {% if request.user == group.uid %}
+                <a href="{% url 'board:board_list' group.id %}" class="">
+                <span class="icon"><ion-icon name="list-outline"></ion-icon></span>
+                <span class="title">게시판 관리</span>
+                {% endif %}
+                </a>
+            </li>
          </ul>
     </div>
-    <div class="others">
-                <ul>
-                    <li>
-                            <a href="{% url 'group:group_list' %}" class="">
-                                <span class="icon"><ion-icon name="list-circle-outline"></ion-icon></span>
-                                    <span class="others_name">그룹 보기</span>
-                    </li>
-                    <li>
-                        <a class="">
-                                <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
-                                <span class="others_name">캘린더 보기</span>
-                            </a>
-                    </li>
-                    {% if request.user == group.uid %}
-                        <li>
-                            <a href="{% url 'board:board_list' group.id %}" class="">
-                                <span class="icon"><ion-icon name="list-outline"></ion-icon></span>
-                                <span class="others_name">게시판 관리</span>
-                        </li>
-                    {% endif %}
-                    
-                </ul>
-    </div>
-    <style>
-    .others{
-        margin-top: 55%;
-    }
-    .others ul li{
-        list-style: none;
-    }
-    </style>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script>
+
+    </script>
 </body>
 </html>
