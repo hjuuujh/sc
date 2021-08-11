@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from board import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name='board'
 urlpatterns = [
@@ -32,4 +34,5 @@ urlpatterns = [
     path('comment/create/<int:post_id>/', views.comment_create, name='comment_create'),
     path('comment/modify/<int:comment_id>/', views.comment_modify, name='comment_modify'),
     path('comment/delete/<int:comment_id>/', views.comment_delete, name='comment_delete'),
-]
+    path('cal/',include('cal.urls')),
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

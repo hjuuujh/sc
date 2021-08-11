@@ -77,7 +77,12 @@ class PostListView(generic.ListView):
 @login_required(login_url='common:login')
 def post_create(request, group_id ,board_id):
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST,request.FILES)
+
+        try:
+            form.file=request.FILES['file']
+        except: #이미지가 없어도 그냥 지나가도록-!
+            pass
         if form.is_valid():
             post = form.save(commit=False)
             post.gid_id = group_id
@@ -107,7 +112,7 @@ def post_modify(request, board_id, pk):
         return redirect('board:post_detail', group_id=post.gid.id, board_id=board_id, pk=post.id)
 
     if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(request.POST ,request.FILES, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
             post.bid_id = board_id
