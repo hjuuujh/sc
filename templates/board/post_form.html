@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container-list">
     <h5 class="my-3 border-bottom pb-2">게시글 작성</h5>
-    <form method="post" >
+    <form method="post" enctype="multipart/form-data" novalidate  >
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-black">저장하기</button>

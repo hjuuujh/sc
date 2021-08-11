@@ -85,6 +85,7 @@ body{
         height: 60px;
         line-height: 60px;
         white-space: normal;
+        margin: -5px;
     }
 
     .menu a.trigger{
@@ -168,3 +169,5 @@ body{
 		color:#fff;
 	}
 }
+
+

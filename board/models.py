@@ -2,6 +2,8 @@ from django.db import models
 from group.models import Group
 from django.contrib.auth.models import User
 from django.utils import timezone
+import os
+from django.conf import settings
 
 
 class Board(models.Model):
@@ -21,6 +23,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     contents = models.TextField(max_length=1000)
     post_hit = models.PositiveIntegerField(default = 0)
+    file = models.ImageField(null=True , upload_to="", blank=True)   # 이미지파일 
     
 
     def __str__(self):
@@ -34,6 +37,10 @@ class Post(models.Model):
         self.post_hit += 1 
         self.save()
     
+    # def delete(self, args, **kargs):
+    #         if self.file:
+    #             os.remove(os.path.join(settings.MEDIA_ROOT, self.file.path))
+    #         super(Post, self).delete(args, **kargs)    
 
 
 class Comment(models.Model):

@@ -5,7 +5,7 @@ from board.models import *
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post  # 사용할 모델
-        fields = ['title', 'contents']  # QuestionForm에서 사용할 Question 모델의 속성
+        fields = ['title', 'contents','file']  # 게시글 제목, 내용, 이미지파일
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'contents': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),
@@ -13,7 +13,12 @@ class PostForm(forms.ModelForm):
         labels = {
             'title': '제목',
             'contents': '내용',
+            'file' : 'Image File'
         }
+    
+    def __init__(self, *args, **kwargs):
+        super(PostForm, self).__init__(*args, **kwargs)
+        self.fields['file'].required = False
 
 
 
