@@ -1,0 +1,49 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <script src="{% static 'jquery-3.4.1.min.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+  <script src="{% static 'bootstrap.min.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <title>Study Check</title>
+
+</head>
+<body>
+  <div class = "sidenav">
+    {% include "cal_menu.html" %}
+  </div>
+  <div class = "list">
+    {% block content %}
+    {%endblock%}
+    {% block script %}
+    {% endblock %}
+  </div>
+</body>
+
+<script>
+    $(function () {
+        var trigger = $('.trigger');
+        var menu = $('.menulist');
+        $(trigger).on('click', function (e) {
+            e.preventDefault();
+            menu.slideToggle();
+        });
+        $(window).resize(function () {
+            var w = $(window).width();
+            if (w > 768 && menu.is(':hidden')) {
+                menu.removeAttr('style');
+            }
+        });
+    });
+</script>
+</html>

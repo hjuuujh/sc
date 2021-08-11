@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    background: #fff;
+}
+
+@media screen and (min-width: 768px){
+
+    .menu{
+        position: relative;
+        margin:auto;
+        top:10%;
+        width: 300px;
+        height: 400px;
+        border-radius: 10px;
+        box-sizing: initial;
+        border-left: 5px solid #242425;
+        background: #575758;
+        transition: 0.5s;
+    }
+
+    .menu ul{
+        margin:0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-left: 5px;
+        padding-top: 20px;
+    }
+
+    .menu ul li{
+        position: relative;
+        list-style: none;
+        width: 100%;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        color:#fff;
+    }
+
+    .active{
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background: rgb(0, 0, 0);
+    }
+
+    .menuLink active{
+        background: rgb(0, 0, 0) !important;
+    }
+
+    .menu ul li a{
+        position: relative;
+        display: block;
+        width: 100%;
+        display: flex;
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+    }
+
+    .menu ul li a .icon{
+        position: relative;
+        display: block;
+        min-width: 60px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+    }
+
+    .menu ul li a .icon ion-icon{
+        font-size: 1.5em;
+    }
+
+    .menu ul li a .title{
+        position: relative;
+        display: block;
+        padding-left: 10px;
+        height: 60px;
+        line-height: 60px;
+        white-space: normal;
+    }
+
+    .menu a.trigger{
+        display:none;
+    }
+
+    .info{
+        height:60px;
+        padding-left:5%;
+        padding-right:5%;
+        line-height:20px;
+    }
+}
+
+/* 가로 좁을때 (이 사이즈보다 작은 경우 적용)*/
+@media screen and (max-width: 768px){
+
+    .sidenav{
+        padding-top:0px;
+    }
+
+    .group-main-text{
+        display:none;
+    }
+
+    .menu{
+        border-bottom: 0;
+        margin:0;
+        line-height:40px;
+    }
+
+    .menu trigger a{
+         text-decoration:none;
+    }
+
+    .trigger a:visited{
+         color:#fff;
+    }
+
+    .menu ul{
+        display: none;
+	    height:auto;
+        margin:0;
+        padding:0;
+        text-align:center;
+    }
+
+    .info{
+        display: none !important;
+    }
+
+    .menu ul li{
+        display: block;
+		float: none;
+		height:40px;
+		border-bottom: 1px solid #576979;
+        background-color: #000;
+        line-height:40px;
+    }
+
+    .menu ul li a{
+        text-decoration:none;
+    }
+
+    .menu ul li a:visited{
+        color:#fff;
+    }
+
+    .menu ul li a:hover{
+        color:grey;
+    }
+
+    .menu a.trigger {
+        border-bottom: 1px solid #576979;
+		display: block;
+		height:40px;
+		background-color: #000;
+		width: 100%;
+		position: relative;
+		text-decoration:none;
+		color:#fff;
+	}
+}

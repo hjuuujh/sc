@@ -24,5 +24,5 @@ app_name = 'cal'
 urlpatterns = [
     path('<int:pk>/', views.CalendarView.as_view(), name='calendar'),
     path('<int:pk>/event/new/', views.event_new, name='event_new'),
-    path('event/edit/<int:event_id>/', views.event_edit, name='event_edit'),
+    path('event/edit/<int:event_id>', views.event_edit, name='event_edit'),
 ]

@@ -70,14 +70,19 @@ def event_new(request, pk):
 
 def event_edit(request, event_id=None):
     instance = get_object_or_404(Event, pk=event_id)
-
+    flag = request.POST.get("flag")
     form = EventForm(request.POST or None, instance = instance)
+
     if request.POST and form.is_valid():
-        cal = form.save(commit=False)
-        pk = cal.gid.id
-        cal.save()
+        event = form.save(commit=False)
+        pk = event.gid.id
+        if flag=="1" :
+            event.save()
+        else:
+            event.delete()
         url = reverse('cal:calendar', kwargs={'pk': pk})
         return HttpResponseRedirect(url)
+
     else:
         form = EventForm(instance=instance)
         pk = instance.gid.id
