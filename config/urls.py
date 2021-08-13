@@ -18,12 +18,14 @@ from django.urls import path, include
 from config  import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('group/', include('group.urls')),
     path('board/', include('board.urls')),
-    path('', views.HomeView.as_view(), name='home'),
+    path('', auth_views.LoginView.as_view(template_name='common/login.html'), name='login'),
+    # path('', views.HomeView.as_view(), name='home'),
     path('common/', include('common.urls')),
     path('cal/',include('cal.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
