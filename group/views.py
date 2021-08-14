@@ -21,8 +21,8 @@ class IndexView(generic.ListView):  # 그룹 전체 리스트
     def get_queryset(self):
         group_list = Group.objects.filter(
             id__in=Join.objects.filter(uid=self.request.user)
-                .order_by('date')
                 .values('gid')
+                .order_by('date')
         )
         return group_list
 

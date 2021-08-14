@@ -7,7 +7,7 @@
         <thead>
         <tr class="thead-dark">
             <th style="width:20%">그룹 이름</th>
-            <th>유저 이름</th>
+            <th style="width:15%">유저 이름</th>
             <th>지원동기</th>
             <th>신청일시</th>
             <th>승인</th>
@@ -23,10 +23,10 @@
             <td>{{ request.motivation }}</td>
             <td>{{ request.date }}</td>
             <td>
-                <a class = "btn btn-black" href = "#" name = "requestApprove" role="button"
+                <a class = "btn btn-black" href = "#" name = "requestApprove" role="button" style="margin-bottom:5px"
             data-uri = "{% url 'group:approve_request' request.uid.id request.gid.id 1%}">
                 승인</a>
-                <a class = "btn btn-black" href = "#" name = "requestReject" role="button"
+                <a class = "btn btn-black" href = "#" name = "requestReject" role="button" style=""
             data-uri = "{% url 'group:approve_request' request.uid.id request.gid.id 0%}">
                 거부</a>
             </td>

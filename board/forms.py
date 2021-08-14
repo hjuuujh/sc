@@ -30,7 +30,7 @@ class CommentForm(forms.ModelForm):
             'contents': '댓글 내용',
         }
         widgets = {
-            'contents': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),
+            'contents': forms.TextInput(attrs={'class': 'form-control'}),
         }
         labels = {
             'contents': '내용',

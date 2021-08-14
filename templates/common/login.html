@@ -1,7 +1,8 @@
-<!-- {% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
     <head>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
@@ -9,137 +10,78 @@
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
-        <title>Log-in</title>
+        <title>Study Check</title>
+        <!--구글 폰트 -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Gowun+Dodum&family=Gugi&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Dancing+Script:wght@700&family=Source+Code+Pro:ital,wght@1,500&family=WindSong:wght@500&display=swap" rel="stylesheet">
+<style>
+   * {
+      font-family: 'Gowun Dodum', sans-serif;
+
+   }
+
+   h1{
+      font-size: 700%;
+      font-weight: bold;
+      font-family: 'Amatic SC', cursive;
+
+
+   }
+</style>
     </head>
 
     <body>
-        <nav class="nav justify-content-end bg-light">
-          <a class="navbar-brand" href="/">Home</a>
-          <a class="navbar-brand" href="{% url 'common:login' %}">로그인</a>
-          <a class="navbar-brand" href="{% url 'common:signup' %}">회원가입</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          </div>
-        </nav>
         <div class="sidenav">
-            <div class="login-main-text">
-               <h2>Application<br> Login Page</h2>
-               <p>Login or register from here to access.</p>
-            </div>
-         </div> -->
-         <!-- <div class="main"> -->
+         <div class="login-main-text" style="margin:0;padding:0px 20px;">       <!-- 이부분 class 이름 바꾸기-->
+            <h1>Study Check &nbsp; <span style="color: rgb(150, 159, 170);"><i class="fas fa-user-edit "></i></span></h1>  <br>
+            <p><h3>코로나로 인해 비대면 활동이 활성화 되면서 <br>
+               혼자 공부할 수 없는 환경에서 다른사람들과<br> 함께 내용을 공유하거나<br>
+               강제성이 필요한 사람들을 위한 곳 입니다.</h3> <br><br>
+            </p>
+            <p><h5>여러분도 목적에 맞는 그룹에 소속하여 스터디그룹 활동을 해보시길 바랍니다.</h5>
+            </p>
+         </div>
+      </div>
+        <!-- navbar 했는데 홈 디자인 때문에 가려져서 안보임.  수정해야할듯! -->
+        <nav class="nav justify-content-end bg-light">
+         <a class="navbar-brand" href="/">Home</a>
+            <!-- home에서 로그인안하면 에러  -->
 
-            <!DOCTYPE html>
-            <html lang="ko">
-                <head>
-            
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                    <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
-            
-                    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-                    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-                    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-                    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-                    
-                    <title>Study Check</title>
-                    <!--구글 폰트 -->
-                    <link rel="preconnect" href="https://fonts.googleapis.com">
-                    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Gowun+Dodum&family=Gugi&display=swap" rel="stylesheet">
-                    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Dancing+Script:wght@700&family=Source+Code+Pro:ital,wght@1,500&family=WindSong:wght@500&display=swap" rel="stylesheet">
-            <style>
-               * {
-                  font-family: 'Gowun Dodum', sans-serif;
-               
-               }
-            
-               h1{
-                  font-size: 700%;
-                  font-weight: bold;
-                  font-family: 'Amatic SC', cursive;
-            
-                  
-               }
-            </style>
-                </head>
 
-                <body>
-                    <div class="sidenav">
-                     <div class="login-main-text" style="margin:0;padding:0px 20px;">       <!-- 이부분 class 이름 바꾸기-->
-                        <br><br><br> <h1>Study Check &nbsp; <span style="color: rgb(150, 159, 170);"><i class="fas fa-user-edit "></i></span></h1>  <br>
-                        <br><br><br><p><h3>코로나로 인해 비대면이 활동이 활성화 되면서 <br>
-                           혼자 공부할 수 없는 환경에서 다른사람들과<br> 함께 내용을 공유하거나<br> 
-                           강제성이 필요한 사람들을 위한 곳 입니다.</h3> <br><br>
-                        </p>
-                        <p><h5>여러분도 목적에 맞는 그룹에 소속하여 스터디그룹 활동을 해보시길 바랍니다.</h5>
-                        </p>
-                     </div>
-                  </div>
-                    <!-- navbar 했는데 홈 디자인 때문에 가려져서 안보임.  수정해야할듯! -->
-                    <nav class="nav justify-content-end bg-light">
-                     <a class="navbar-brand" href="/">Home</a>
-                        <!-- home에서 로그인안하면 에러  -->
-            
-            
-                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                       <span class="navbar-toggler-icon"></span>
-                     </button>
-                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            
-                     </div>
-                   </nav>
-            <!--                                                        -->
-                  <div class="main">
-                    <div class="col-md-5 col-sm-20">
-                        <div class ="login-form">
-                            <form method="post" class="post-form" action="{% url 'common:login' %}">
-                                {% csrf_token %}
-                                {% include "form_errors.html" %}
-                                <div class="form-group">
-                                    <label for="username">User Name</label>
-                                    <input type="text" class="form-control" name="username" id="username"
-                                        value="{{ form.username.value|default_if_none:'' }}" placeholder="User Name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" name="password" id="password"
-                                        value="{{ form.password.value|default_if_none:'' }}" placeholder="Password">
-                                </div>
-                                <button type="submit" class="btn btn-black">Login</button>   
-                                <span>또는 <a href="{% url 'common:signup' %}">Click here to register</a></span>
-                            </form>
-                        </div>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+         </div>
+       </nav>
+<!--                                                        -->
+      <div class="main">
+        <div class="col-md-5 col-sm-20">
+            <div class ="login-form">
+                <form method="post" class="post-form" action="{% url 'common:login' %}">
+                    {% csrf_token %}
+                    {% include "form_errors.html" %}
+                    <div class="form-group">
+                        <label for="username">User Name</label>
+                        <input type="text" class="form-control" name="username" id="username"
+                            value="{{ form.username.value|default_if_none:'' }}" placeholder="User Name">
                     </div>
-                  </div>
-               
-                </body>
-            </html>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" id="password"
+                            value="{{ form.password.value|default_if_none:'' }}" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-black">Login</button>
+                    <span>또는 <a href="{% url 'common:signup' %}">Click here to register</a></span>
+                </form>
+            </div>
+        </div>
+      </div>
 
-            <!-- <div class="col-md-5 col-sm-20">
-                <div class ="login-form">
-                    <form method="post" class="post-form" action="{% url 'common:login' %}">
-                        {% csrf_token %}
-                        {% include "form_errors.html" %}
-                        <div class="form-group">
-                            <label for="username">User Name</label>
-                            <input type="text" class="form-control" name="username" id="username"
-                                value="{{ form.username.value|default_if_none:'' }}" placeholder="User Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" id="password"
-                                value="{{ form.password.value|default_if_none:'' }}" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-black">Login</button>   
-                        <span>또는 <a href="{% url 'common:signup' %}">Click here to register</a></span>
-                    </form>
-                </div>
-            </div> -->
-         <!-- </div> -->
-    <!-- </body>
-
-</html> -->
+    </body>
+</html>

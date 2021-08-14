@@ -89,7 +89,7 @@
     <!-------------------------페이지 리스트------------------------------------------------ -->
 
         {% for page_number in search_list.paginator.page_range %}
-        {% if search_list.number|add:-2 <= page_number <= search_list.number|add:2 %}
+        {% if page_number >= search_list.number|add:-2 and page_number <= search_list.number|add:2 %}
             {% if page_number == search_list.number %}
             <li class="page-item active" aria-current="page">
                 <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
@@ -111,7 +111,7 @@
             <a class="page-link" data-page="{{ search_list.next_page_number }}" href="#"> > </a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"> >> </a>
+            <a class="page-link" href="?page={{ search_list.paginator.num_pages }}"> >> </a>
         </li>
         {% else %}
         <li class="page-item disabled">
